@@ -7,7 +7,7 @@
 <AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="7.0.3.201406021408" AlpVersion="7.0.2">
 <Model>
 	<Id>1382611259579</Id>
-	<Name><![CDATA[HPP v5]]></Name>
+	<Name><![CDATA[LGCA]]></Name>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[hpp_v5]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Second]]></ModelTimeUnit>
@@ -3875,6 +3875,288 @@ public class ParticlePositionMap implements java.io.Serializable {
 		return counter;
 	}
 	
+
+}]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1422626210551</Id>
+			<Name><![CDATA[HexCell]]></Name>
+			<Text><![CDATA[/**
+ * HexCell
+ */	
+public class HexCell implements Serializable {
+	private static Random random = new Random(12345);
+	
+    /**
+     * Default constructor
+     */
+    public HexCell() {
+    	this.inParticles.add(null);
+    	this.inParticles.add(null);
+    	this.inParticles.add(null);
+    	this.inParticles.add(null);
+    	this.inParticles.add(null);
+    	this.inParticles.add(null);
+
+    	this.outParticles.add(null);
+    	this.outParticles.add(null);
+    	this.outParticles.add(null);
+    	this.outParticles.add(null);
+    	this.outParticles.add(null);
+    	this.outParticles.add(null);
+
+    	this.neighbours.add(null);
+    	this.neighbours.add(null);
+    	this.neighbours.add(null);
+    	this.neighbours.add(null);
+    	this.neighbours.add(null);
+    	this.neighbours.add(null);
+    }
+    /**
+     * the direction indicates which direction you have to go from "this"<br>
+     * HexCell to reach the new neighbour
+     * @param neighbour
+     * @param direction
+     */
+    
+    /*
+     * "the direction refers to the direction the Particle will go next!!!
+     */
+    /*
+     * in particles are the particles before collision
+     */
+    ArrayList<Particle> inParticles = new ArrayList<Particle>();
+    /*
+     * out particles are the particles after collision
+     */
+    ArrayList<Particle> outParticles = new ArrayList<Particle>();
+    /**
+     * Neigbours of this cell.
+     */
+    ArrayList<HexCell> neighbours = new ArrayList<HexCell>();
+    
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	/**
+	 * NE=North East<br>
+	 * SW=South West<br>
+	 * etc...
+	 * @author CLF
+	 *
+	 */
+	public static enum Direction {
+		E(0),NE(1),NW(2),W(3),SW(4),SE(5);
+		private int value;
+		Direction(int value) {
+			this.value = value;
+		}
+		int getValue() {
+			return value;
+		}
+		public static Direction opposite(Direction dir) {
+			switch(dir) {
+			case E: return Direction.W;
+			case NE: return Direction.SW;
+			case NW: return Direction.SE;
+			case W: return Direction.E;
+			case SW: return Direction.NE;
+			case SE: return Direction.NW;
+			}
+			return null;
+		}
+		public static Direction fromInt(int i) {
+			if (i<0 || i>5) throw new RuntimeException("Invalid input integer. Must be between 0 and 5, but was "+i);
+			switch(i) {
+			case 0:
+				return E;
+			case 1:
+				return NE;
+			case 2:
+				return NW;
+			case 3:
+				return W;
+			case 4:
+				return SW;
+			case 5:
+				return SE;
+			}
+			return null;
+		}
+	}
+	
+	/**
+	 * After movement
+	 * Takes in-particles and performs collisions on them
+	 */
+	public void performCollision() {
+		int count = this.getInCount();
+		if (count <0 || count > 6) throw new RuntimeException("Invalid count "+count);
+		
+		for (int i=0; i<6; i++) {
+			this.outParticles.set(i, this.inParticles.get(i));
+		}
+		
+		if (count==0) return; // no collision
+		else if (count==1) {
+			return; // no collision
+		} else if (count==2) { // possible collision(s)
+			if (inParticles.get(Direction.E.getValue()) != null && inParticles.get(Direction.W.getValue()) != null) {
+				//collision 50% chance
+				if (HexCell.random.nextBoolean()) {
+					this.rotateClockwise();
+				} else {
+					this.rotateCounterClockwise();
+				}
+				return;
+			} else if (inParticles.get(Direction.NE.getValue()) !=null && inParticles.get(Direction.SW.getValue())!=null) {
+				//collision 50% chance
+				if (HexCell.random.nextBoolean()) {
+					this.rotateClockwise();
+				} else {
+					this.rotateCounterClockwise();
+				}
+				return;
+			} else if (inParticles.get(Direction.NW.getValue()) !=null && inParticles.get(Direction.SE.getValue())!=null) {
+				//collision 50% chance
+				if (HexCell.random.nextBoolean()) {
+					this.rotateClockwise();
+				} else {
+					this.rotateCounterClockwise();
+				}
+				return;
+			} else {
+				// no collision
+				
+			}
+		} else if (count > 2) { // certain collision
+			this.rotateClockwise();
+		}
+	}
+	/**
+	 * rotates the out-particles in the HexCell clockwise.<br>
+	 * meaning: e.g. outParticles.E will be outParticles.NE
+	 */
+	private void rotateClockwise() {
+		Particle temp = this.outParticles.get(0);
+		for (int i=0; i<5; i++) {
+			this.outParticles.set(i, this.outParticles.get(i+1));
+		}
+		this.outParticles.set(5, temp);
+	}
+	/**
+	 * rotates the out-particles in the HexCell counterclockwise.<br>
+	 * meaning: e.g. outParticles.E will be outParticles.SE
+	 */
+	private void rotateCounterClockwise() {
+		Particle temp = this.outParticles.get(5);
+		for (int i=5; i>0; i--) {
+			this.outParticles.set(i, this.outParticles.get(i-1));
+		}
+		this.outParticles.set(0, temp);
+	}
+	/**
+	 * returns number of not null in-particles
+	 * @return
+	 */
+	public int getInCount() {
+		int count = 0;
+		for (int i=0; i<6; i++) {
+			if (this.inParticles.get(i) != null) count++;
+		}
+		return count;
+	}
+	
+	/**
+	 * returns number of not null out-particles
+	 * @return
+	 */
+	public int getOutCount() {
+		int count = 0;
+		for (int i=0; i<6; i++) {
+			if (this.outParticles.get(i) != null) count++;
+		}
+		return count;
+	}
+	
+	/**
+	 * Basicly makes sure the in-slots are clear
+	 */
+	public void prePreformMovement() {
+		for (int i=0; i<6; i++) {
+			this.inParticles.set(i, null);
+		}
+	}
+	/**
+	 * Will check the neighbours and move particles that are supposed to come here to this cell.<br>
+	 * if particles hit a wall (no neighbour in the given direction) they will instead STAY in<br>
+	 * the cell but be moved in the opposite in-particle slow.<br>
+	 * So e.g.: out.E will go to in.W
+	 */
+	public void performMovement() { // pull. we might need to perform push because there might be no neighbours
+		for (int i=0; i<6; i++) {
+			Direction dir = Direction.fromInt(i);
+			Direction oppDir = Direction.opposite(dir);
+			Particle p = this.outParticles.get(dir.getValue());
+			if (p==null) continue;
+			HexCell neighbour = this.getNeighbour(dir);
+			this.outParticles.set(dir.getValue(), null);
+			if (neighbour != null) {
+				neighbour.recieceParticleFrom(this, p);
+			} else {
+				// we've hit a wall
+				this.inParticles.set(oppDir.getValue(), p);
+			}
+		}
+	}
+	
+	/**
+	 * Will autodetect the direction from which the particle is coming
+	 * @param neighbour - must be neighbour, not null
+	 * @param newParticle - null is valid
+	 */
+	public void recieceParticleFrom(HexCell neighbour, Particle newParticle) {
+		if (neighbour == null) throw new NullPointerException("Input neighbour is null");
+		for (int i=0; i<6; i++) {
+			if (neighbour.equals(this.neighbours.get(i))) {
+				this.inParticles.set(i, newParticle);
+				return;
+			}
+		}
+		throw new RuntimeException("Input neighbour is not a neighbour of this cell.");
+	}
+	
+	/**
+	 * Returns the neighbour that is in the input direction from this cell
+	 * @param direction
+	 * @return
+	 */
+	public HexCell getNeighbour(Direction direction) {
+		if (direction==null) throw new NullPointerException("Input direction is null");
+		return this.neighbours.get(direction.getValue());
+	}
+	
+	/**
+	 * The direction refers to the direction you need to go from "this" cell<br>
+	 * to reach the neighbour
+	 * @param neighbour - may be null, may not exist for another direction
+	 * @param direction - not null
+	 */
+	public void setNeighbour(HexCell neighbour, Direction direction) {
+		if (direction==null) throw new NullPointerException("Input direction is null");
+    	if (neighbour != null && this.neighbours.contains(neighbour) && !neighbour.equals(this.neighbours.get(direction.getValue()))) {
+    		throw new RuntimeException("The input neighbour is already set in this HexCell for a different direction.");
+    	}
+    	this.neighbours.set(direction.getValue(), neighbour);
+    }
+
+	/**
+	 * This number is here for model snapshot storing purpose<br>
+	 * It needs to be changed when this class gets changed
+	 */ 
+	private static final long serialVersionUID = 1L;
 
 }]]></Text>
 		</JavaClass>
