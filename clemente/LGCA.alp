@@ -3938,7 +3938,18 @@ public class HexCell implements Serializable {
     
 	@Override
 	public String toString() {
-		return super.toString();
+		String out = "[";
+		for (int i=0; i<6; i++) {
+			if (i!=0) out+=",";
+			if (this.outParticles.get(i)!=null) {
+				out+="_";
+			} else {
+				out+="x";
+			}
+		}
+		
+		out+="]";
+		return out;
 	}
 	/**
 	 * NE=North East<br>
@@ -4151,6 +4162,63 @@ public class HexCell implements Serializable {
     	}
     	this.neighbours.set(direction.getValue(), neighbour);
     }
+
+	/**
+	 * This number is here for model snapshot storing purpose<br>
+	 * It needs to be changed when this class gets changed
+	 */ 
+	private static final long serialVersionUID = 1L;
+
+}]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1422731631687</Id>
+			<Name><![CDATA[HexMap]]></Name>
+			<Text><![CDATA[/**
+ * HexMap
+ */	
+public class HexMap implements Serializable {
+	private int x=1;
+	private int y=1;
+	private ArrayList<ArrayList<HexCell>> map = new ArrayList<ArrayList<HexCell>>();
+    /**
+     * Default constructor
+     */
+    private HexMap() {
+    }
+    /**
+     * Creates a HexMap with x rows and y "columns"<br>
+     * The columns are of course not "really" columns, they go zick-zack
+     * @param x > 0
+     * @param y > 0
+     * @return
+     */
+    public static HexMap createHexMap(int x, int y) {
+    	if (x<=0) throw new RuntimeException("x has to be larger than 0, but was "+x);
+    	if (y<=0) throw new RuntimeException("y has to be larger than 0, but was "+y);
+    	HexMap out = new HexMap();
+    	out.x = x;
+    	out.y = y;
+    	boolean topIsLeft=true;
+    	for (int r=0; r<x; r++) {
+    		topIsLeft = !topIsLeft;
+    		ArrayList<HexCell> row = new ArrayList<HexCell>();
+    		for (int c=0; c<y; c++) {
+    			HexCell hc = new HexCell();
+    			if (r>0) {
+    				int previousRow = r-1;
+    				
+    			}
+    		}
+    	}
+    	
+    	return out;
+    }
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 	/**
 	 * This number is here for model snapshot storing purpose<br>
