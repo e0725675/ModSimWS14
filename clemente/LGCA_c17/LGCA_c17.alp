@@ -1258,7 +1258,7 @@ System.out.println("Grid created");]]></StartupCode>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" AccessType="private" StaticVariable="false">
 						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[java.util.ArrayList<HCell>]]></ElementClass>
+						<ElementClass><![CDATA[java.util.ArrayList<Integer>]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 					</Properties>
 
@@ -1298,9 +1298,10 @@ int cellCounter = 0;
 boolean topIsLeft=true;
 for (int r=0; r<numRows; r++) {
 	topIsLeft = !topIsLeft;
-	ArrayList<HCell> row = new ArrayList<HCell>();
+	ArrayList<Integer> row = new ArrayList<HCell>();
 	for (int c=0; c<numColumns; c++) {
 		HCell hc = this.hCells.get(cellCounter);
+		int hcInd=cellCounter;
 		cellCounter++;
 		if (c>0) { // set horizontal neighbours
 			HCell prev = row.get(c-1);
@@ -1314,11 +1315,11 @@ for (int r=0; r<numRows; r++) {
 					HCell nw = null;
 					HCell ne = null;
 					if (topIsLeft) {
-						nw = this.map.get(previousRow).get(c);
-						ne = this.map.get(previousRow).get(c+1);
+						nw = this.hCells.get(this.map.get(previousRow).get(c));
+						ne = this.hCells.get(this.map.get(previousRow).get(c+1));
 					} else { //if (topIsLeft) {
-						nw = this.map.get(previousRow).get(c-1);
-						ne = this.map.get(previousRow).get(c);
+						nw = this.hCells.get(this.map.get(previousRow).get(c-1));
+						ne = this.hCells.get(this.map.get(previousRow).get(c));
 					}
 					hc.setNeighbour(nw, Tools.Direction.NW);
 					nw.setNeighbour(hc, Tools.Direction.SE);
@@ -1330,7 +1331,7 @@ for (int r=0; r<numRows; r++) {
 					//border right
 					if (topIsLeft) {
 						HCell nw = null;
-						nw = this.map.get(previousRow).get(c);
+						nw = this.hCells.get(this.map.get(previousRow).get(c));
 						
 						hc.setNeighbour(nw, Tools.Direction.NW);
 						nw.setNeighbour(hc, Tools.Direction.SE);
@@ -1338,8 +1339,8 @@ for (int r=0; r<numRows; r++) {
 						HCell nw = null;
 						HCell ne = null;
 						
-						nw = this.map.get(previousRow).get(c-1);
-						ne = this.map.get(previousRow).get(c);
+						nw = this.hCells.get(this.map.get(previousRow).get(c-1));
+						ne = this.hCells.get(this.map.get(previousRow).get(c));
 						
 						hc.setNeighbour(nw, Tools.Direction.NW);
 						nw.setNeighbour(hc, Tools.Direction.SE);
@@ -1354,8 +1355,8 @@ for (int r=0; r<numRows; r++) {
 					HCell nw = null;
 					HCell ne = null;
 					
-					nw = this.map.get(previousRow).get(c);
-					ne = this.map.get(previousRow).get(c+1);
+					nw = this.hCells.get(this.map.get(previousRow).get(c));
+					ne = this.hCells.get(this.map.get(previousRow).get(c+1));
 					
 					hc.setNeighbour(nw, Tools.Direction.NW);
 					nw.setNeighbour(hc, Tools.Direction.SE);
@@ -1365,14 +1366,14 @@ for (int r=0; r<numRows; r++) {
 				} else {
 					HCell ne = null;
 					
-					ne = this.map.get(previousRow).get(c);
+					ne = this.hCells.get(this.map.get(previousRow).get(c));
 
 					hc.setNeighbour(ne, Tools.Direction.NE);
 					ne.setNeighbour(hc, Tools.Direction.SW);
 				}
 			} // if (c>0) {
 		} //if (r>0) {
-		row.add(hc);
+		row.add(hcInd);
 	} // for (int c=0; c<y; c++) {
 	this.map.add(row);
 } // for (int r=0; r<x; r++) {
@@ -1394,7 +1395,7 @@ topIsLeft = true;
 for (int r=0; r<numRows; r++) {
 	topIsLeft=!topIsLeft;
 	for (int c=0; c<numColumns; c++) {
-		HCell current = this.map.get(r).get(c);
+		HCell current = this.hCells.get(this.map.get(r).get(c));
 		double offsetX = 0;
 		if (topIsLeft) offsetX = HCell.horizontalOffset;
 		double offsetY = -HCell.verticalOffset*r;
@@ -1446,8 +1447,8 @@ for (int i=0; i<particles.size(); i++) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[this.map.get(3).get(0).setParticle(Tools.Direction.E, 0);
-this.map.get(3).get(8).setParticle(Tools.Direction.W, 1);]]></Body>
+					<Body><![CDATA[//this.map.get(3).get(0).setParticle(Tools.Direction.E, 0);
+//this.map.get(3).get(8).setParticle(Tools.Direction.W, 1);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
