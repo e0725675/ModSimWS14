@@ -21,17 +21,17 @@
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
-			<StartupCode><![CDATA[System.out.println("HexGrid onStartup start");
+			<StartupCode><![CDATA[if (this.debugOutput)System.out.println("HexGrid onStartup start");
 this.initHCells();
-System.out.println("HexGrid onStartup initHCells done");
+if (this.debugOutput)System.out.println("HexGrid onStartup initHCells done");
 createHexGrid();
-System.out.println("HexGrid onStartup createHexGrid done");
+if (this.debugOutput)System.out.println("HexGrid onStartup createHexGrid done");
 initParticles();
-System.out.println("HexGrid onStartup initParticles done");
+if (this.debugOutput)System.out.println("HexGrid onStartup initParticles done");
 populateHCells();
-System.out.println("HexGrid onStartup populateHCells done");
+if (this.debugOutput)System.out.println("HexGrid onStartup populateHCells done");
 //populateHCellsCustom();
-System.out.println("HexGrid onStartup end");]]></StartupCode>
+if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameters><![CDATA[T]]></GenericParameters>
 			<GenericParametersLabel><![CDATA[Generic parameters:]]></GenericParametersLabel>
@@ -336,6 +336,28 @@ System.out.println("HexGrid onStartup end");]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1423065907511</Id>
+					<Name><![CDATA[displayParticles]]></Name>
+					<X>510</X><Y>100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<SdArray>false</SdArray>
+						<DefaultValue><![CDATA[true]]></DefaultValue>
+						<ParameterEditor>
+							<Id>1423065907509</Id>
+							<Name><![CDATA[]]></Name>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1422738092533</Id>
 					<Name><![CDATA[map]]></Name>
@@ -377,6 +399,21 @@ System.out.println("HexGrid onStartup end");]]></StartupCode>
 					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
 						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
 						<ElementClass><![CDATA[HCell]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1423062100211</Id>
+					<Name><![CDATA[pixels]]></Name>
+					<X>-90</X><Y>50</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[ShapePixel]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 					</Properties>
 
@@ -504,11 +541,12 @@ for (int r=0; r<numRows; r++) {
 		double offsetY = -HCell.verticalOffset*r;
 		current.setXY(this.rectangle.getX()+(c*HCell.width)+offsetX,
 								this.rectangle.getY()+(r*HCell.height)+offsetY);
+
 	}
 }
-//TODO: fix
-//this.datagraph.setX(this.rectangle.getX()+340);
-//this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
+
+this.datagraph.setX(this.rectangle.getX()+340);
+this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -521,26 +559,30 @@ for (int r=0; r<numRows; r++) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[ArrayList<Integer> index = new ArrayList<Integer>();
+					<Body><![CDATA[ArrayList<int[]> index = new ArrayList<int[]>();
 
 this.clearAllParticles();
-System.out.println("populateHCells clearAllParticles done");
+if (this.debugOutput)System.out.println("populateHCells clearAllParticles done");
 
-for (int i=0; i<(6*this.hCells.size()); i++) {
-	index.add(i);
+for (int i=0; i<(this.hCells.size()); i++) {
+	for (int d=0; d<6; d++) {
+		index.add(new int[]{i,d});
+	}
+	
 }
 //index = Tools.shuffleArrayList(index);
 Collections.shuffle(index);
-System.out.println("populateHCells index shuffled");
+if (this.debugOutput)System.out.println("populateHCells index shuffled");
 // will contain Particle initialization
 for (int i=0; i<particles.size(); i++) {
-	int n = index.remove(0);
-	int cellNum = (int)Math.floor(n/6);
-	int dirNum = n%6;
+	if (this.debugOutput && i%1000==0) System.out.println(i);
+	int[] n = index.remove(0);
+	int cellNum = n[0];
+	int dirNum = n[1];
 	//System.out.println("hCellSize:"+this.hCells.size()+" particlesSize:"+this.particles.size()+" pop: cellNum:"+cellNum+" dirNum:"+dirNum);
 	hCells.get(cellNum).setParticle(Tools.Direction.fromInt(dirNum), i);
 }
-]]></Body>
+if (this.debugOutput)System.out.println("populateHCells afterParticleSet");]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -594,7 +636,7 @@ for (int i=0; i<index.size(); i++) {
 	this.numSusceptible++;
 	break;
 	}
-	Particle p = new Particle(i);
+	Particle p = new Particle(i, this);
 	p.setInitialState(s);
 	this.particles.add(p);
 }]]></Body>
@@ -1008,12 +1050,18 @@ for (int i=0; i<num; i++) {
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode><![CDATA[10]]></VelocityCode>
-				<AfterStepCode><![CDATA[System.out.println("Clock onStep start");
+				<AfterStepCode><![CDATA[if (this.hexGrid.debugOutput)System.out.println("Clock onStep start");
 for (HCell c : this.hexGrid.hCells) {
 	c.onStep(this.hexGrid);
 }
-System.out.println("Clock onStep end");]]></AfterStepCode>
-				<BeforeStepCode><![CDATA[System.out.println("Clock onBeforeStep start");
+if (this.hexGrid.debugOutput)System.out.println("Clock onStep end");
+if (this.hexGrid.displayParticles) {
+for (Particle p : this.hexGrid.particles) {
+	p.updateRepresentation(this.hexGrid);
+}
+}
+]]></AfterStepCode>
+				<BeforeStepCode><![CDATA[if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep start");
 for (HCell c : this.hexGrid.hCells) {
 	c.onBeforeStep(this.hexGrid);
 }
@@ -1023,7 +1071,7 @@ if (this.hexGrid.randomizeParticleLocationsBeforeEachStep) {
 } else {
 	//(System.out.println("no random");
 }
-System.out.println("Clock onBeforeStep end");]]></BeforeStepCode>
+if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></BeforeStepCode>
 				<VelocityGISCode><![CDATA[10]]></VelocityGISCode>
 			</AgentProperties>
 			<EnvironmentProperties>
@@ -1770,6 +1818,10 @@ this.numRows=(int)this.n;]]></ActionCode>
 					<ParameterName><![CDATA[debugOutput]]></ParameterName>
 					<ParameterValue><![CDATA[this.debugOutput]]></ParameterValue>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[displayParticles]]></ParameterName>
+					<ParameterValue><![CDATA[]]></ParameterValue>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties 
 				EnableAdaptiveFrameManagement="true" 
@@ -1904,6 +1956,15 @@ public class Tools implements Serializable {
 		SUSCEPTIBLE,
 		INFECTED,
 		RECOVERED;
+		public static Color getColor(Status state) {
+			if (state==null) return Color.ORANGE;
+			switch(state) {
+			case INFECTED: return Color.RED;
+			case RECOVERED: return Color.GREEN;
+			case SUSCEPTIBLE: return Color.GRAY;
+			default: return Color.ORANGE;
+			}
+		}
 	}
 	public static <T> ArrayList<T> shuffleArrayList(ArrayList<T> list) {
 		ArrayList<T> in = list;
@@ -1950,15 +2011,26 @@ public class Part implements Serializable {
 		<JavaClass>
 			<Id>1423011775702</Id>
 			<Name><![CDATA[Particle]]></Name>
-			<Text><![CDATA[/**
+			<Text><![CDATA[import lgcac17.Tools.Status;
+/**
  * Particle
  */	
 public class Particle implements Serializable {
-
+	private int parentCellIndex = -1;
+	private Tools.Direction direction = null;
+	public void setDirection(Tools.Direction dir) {
+		this.direction = dir;
+	}
+	public void setParentCell(int hCell) {
+		this.parentCellIndex = hCell;
+	}
+	private ShapePixel pixel = new ShapePixel();
     /**
      * Default constructor
      */
-    public Particle(int id) {
+    public Particle(int id, HexGrid hexGrid) {
+    	this.pixel.setColor(Tools.Status.getColor(null));
+    	if (hexGrid.displayParticles)hexGrid.presentation.add(this.pixel);
     	this.id=id;
     }
     private int id=-1;
@@ -2025,7 +2097,12 @@ public class Particle implements Serializable {
 	public boolean isRecovered() {
 		return this.state == Tools.Status.RECOVERED;
 	}
-
+	public void updateRepresentation(HexGrid hexGrid) {
+		//System.out.println(this.id+" - "+this.state);
+		this.pixel.setColor(Tools.Status.getColor(this.state));
+		double[] pos = hexGrid.hCells.get(this.parentCellIndex).getPixelPosition(this.direction);
+		this.pixel.setPos(pos[0], pos[1]);
+	}
 }]]></Text>
 		</JavaClass>
 		<!--   =========   Java Class   ========  -->
@@ -2054,43 +2131,52 @@ public class HCell implements Serializable{
 
 	public void setXY(double x, double y) {
 		this.xLocation = x; this.yLocation = y;
+		for (Tools.Direction dir : Tools.Direction.values()) {
+			switch(dir) {
+			case E: pixelPosE  = new double[]{this.xLocation+this.pixelSize*3, this.yLocation+this.pixelSize*1};break;
+			case NE:pixelPosNE = new double[]{this.xLocation+this.pixelSize*2, this.yLocation};break;
+			case NW:pixelPosNW = new double[]{this.xLocation+this.pixelSize*1, this.yLocation};break;
+			case W: pixelPosW  = new double[]{this.xLocation,                  this.yLocation+this.pixelSize*1};break;
+			case SW:pixelPosSW = new double[]{this.xLocation+this.pixelSize*1, this.yLocation+this.pixelSize*2};break;
+			case SE:pixelPosSE = new double[]{this.xLocation+this.pixelSize*2, this.yLocation+this.pixelSize*2};break;
+			}
+		}
 	}
+	private double[] pixelPosE = new double[]{4,4};
+	private double[] pixelPosNE = new double[]{4,4};
+	private double[] pixelPosNW = new double[]{4,4};
+	private double[] pixelPosW = new double[]{4,4};
+	private double[] pixelPosSW = new double[]{4,4};
+	private double[] pixelPosSE = new double[]{4,4};
+	
 	public double getX() {
 		return this.xLocation;
 	}
 	public double getY() {
 		return this.yLocation;
 	}
-	public static final 
-	double 
-	width = 
-	40.0 
-	;
-	public static final 
-	double 
-	height = 
-	40.0 
-	;
-	public static final 
-	double 
-	verticalOffset = 
-	10.0 
-	;
-	public static final 
-	double 
-	horizontalOffset = 
-	20.0 
-	;
+	public double[] getPixelPosition(Direction dir) {
+		if (dir==null) return new double[]{3,3};
+		switch(dir) {
+		case E: return this.pixelPosE;
+		case NE: return this.pixelPosNE;
+		case NW: return this.pixelPosNW;
+		case W: return this.pixelPosW;
+		case SW: return this.pixelPosSW;
+		case SE: return this.pixelPosSE;
+		}
+		return new double[]{3,3};
+	}
+	public static final double pixelSize = 2.0;
+	public static final double width = 4.0*pixelSize;
+	public static final double height = 3.0*pixelSize;
+	public static final double verticalOffset = 1.0*pixelSize;
+	public static final double horizontalOffset = 2.0*pixelSize;
 	private  int count;
 	// Collection Variables
-	private 
-	java.util.ArrayList <
-	Integer > inParticles = new java.util.ArrayList<Integer>();
-	private 
-	java.util.ArrayList <
-	Integer > outParticles = new java.util.ArrayList<Integer>();
-	private 
-	java.util.ArrayList <Integer> neighbours = new java.util.ArrayList<Integer>();
+	private java.util.ArrayList < Integer > inParticles = new java.util.ArrayList<Integer>();
+	private java.util.ArrayList <Integer > outParticles = new java.util.ArrayList<Integer>();
+	private java.util.ArrayList <Integer> neighbours = new java.util.ArrayList<Integer>();
 	private HCell getHCell(int index, HexGrid hexGrid) {
 		if (index<0) throw new RuntimeException("index < 0 "+index);
 		return hexGrid.hCells.get(index);
@@ -2297,7 +2383,6 @@ public class HCell implements Serializable{
 	} else {
 		this.R_SE.setVisible(false);
 	}*/
-		Color col = null;
 		if (this.outParticles.get(Tools.Direction.E.getValue())!=null) {
 			this.R_E = hexGrid.particles.get(this.outParticles.get(Tools.Direction.E.getValue())).getState();
 		} else {
@@ -2329,6 +2414,7 @@ public class HCell implements Serializable{
 		} else {
 			this.R_SE = null;
 		}
+		
 		//for (int i=0; i<6; i++) {
 		//Point p = this.getParticlePosition(Tools.Direction.fromInt(i));
 		//if (this.outParticles.get(i) != null) {
@@ -2434,6 +2520,7 @@ public class HCell implements Serializable{
 		this.performCollision();
 		this.performInfections(hexGrid);
 		this.performRecoveries(hexGrid);
+		this.updateParticleParents(hexGrid);
 		this.updateRepresentation(hexGrid); 
 	}
 
@@ -2487,6 +2574,15 @@ public class HCell implements Serializable{
 		this.R_NW.setFillColor(Color.WHITE);*/
 
 		this.count=0; 
+	}
+	private void updateParticleParents(HexGrid hexGrid) {
+		for (int i=0; i< 6; i++) {
+			Integer pi = this.outParticles.get(i);
+			if (pi==null || pi<0) continue;
+			hexGrid.particles.get(pi).setParentCell(this.index);
+			hexGrid.particles.get(pi).setDirection(Tools.Direction.fromInt(i));
+			
+		}
 	}
 }
 
