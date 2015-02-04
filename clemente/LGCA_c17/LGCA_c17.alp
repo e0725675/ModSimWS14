@@ -16,934 +16,22 @@
 	<ActiveObjectClasses>
 		<!--   =========   Active Object Class   ========  -->
 		<ActiveObjectClass>
-			<Id>1422734046613</Id>
-			<Name><![CDATA[HCell]]></Name>
-			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
-			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
-			<IconTopGroupPersistent>true</IconTopGroupPersistent>
-			<StartupCode><![CDATA[this.inParticles.add(null);
-this.inParticles.add(null);
-this.inParticles.add(null);
-this.inParticles.add(null);
-this.inParticles.add(null);
-this.inParticles.add(null);
-
-this.outParticles.add(null);
-this.outParticles.add(null);
-this.outParticles.add(null);
-this.outParticles.add(null);
-this.outParticles.add(null);
-this.outParticles.add(null);
-
-this.neighbours.add(null);
-this.neighbours.add(null);
-this.neighbours.add(null);
-this.neighbours.add(null);
-this.neighbours.add(null);
-this.neighbours.add(null);
-
-this.R_NE.setVisible(true);
-this.R_E.setVisible(true);
-this.R_SE.setVisible(true);
-this.R_SW.setVisible(true);
-this.R_W.setVisible(true);
-this.R_NW.setVisible(true);
-
-this.R_NE.setFillColor(Color.WHITE);
-this.R_E.setFillColor(Color.WHITE);
-this.R_SE.setFillColor(Color.WHITE);
-this.R_SW.setFillColor(Color.WHITE);
-this.R_W.setFillColor(Color.WHITE);
-this.R_NW.setFillColor(Color.WHITE);
-
-this.count=0;]]></StartupCode>
-			<Generic>false</Generic>
-			<GenericParameters><![CDATA[T]]></GenericParameters>
-			<GenericParametersLabel><![CDATA[Generic parameters:]]></GenericParametersLabel>
-			<FlowChartsUsage>ENTITY</FlowChartsUsage>
-			<SamplesToKeep>100</SamplesToKeep>
-			<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
-			<ElementsLimitValue>100</ElementsLimitValue>
-			<MakeDefaultViewArea>false</MakeDefaultViewArea>
-			<SceneGridColor/>
-			<SceneBackgroundColor/>
-			<AgentProperties>
-	 			<SpaceType>CONTINUOUS</SpaceType>			
-				<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
-				<RotateAnimationTowardsMovement>false</RotateAnimationTowardsMovement>
-				<RotateAnimationVertically>false</RotateAnimationVertically>
-				<VelocityCode><![CDATA[10]]></VelocityCode>
-				<AfterStepCode><![CDATA[this.performCollision();
-this.performInfections();
-this.performRecoveries();
-this.updateRepresentation();]]></AfterStepCode>
-				<BeforeStepCode><![CDATA[this.performMovement();]]></BeforeStepCode>
-				<VelocityGISCode><![CDATA[10]]></VelocityGISCode>
-			</AgentProperties>
-			<EnvironmentProperties>
-					<EnableSteps>false</EnableSteps>
-					<StepDurationCode><![CDATA[1.0]]></StepDurationCode>
-					<SpaceType>CONTINUOUS</SpaceType>
-					<WidthCode><![CDATA[500]]></WidthCode>
-					<HeightCode><![CDATA[500]]></HeightCode>
-					<ZHeightCode><![CDATA[0]]></ZHeightCode>
-					<ColumnsCountCode><![CDATA[100]]></ColumnsCountCode>
-					<RowsCountCode><![CDATA[100]]></RowsCountCode>
-					<NeigborhoodType>MOORE</NeigborhoodType>
-					<LayoutType>USER_DEF</LayoutType>
-					<LayoutTypeApplyOnStartup>true</LayoutTypeApplyOnStartup>
-					<NetworkType>USER_DEF</NetworkType>
-					<NetworkTypeApplyOnStartup>true</NetworkTypeApplyOnStartup>
-					<ConnectionsPerAgentCode><![CDATA[2]]></ConnectionsPerAgentCode>
-					<ConnectionsRangeCode><![CDATA[50]]></ConnectionsRangeCode>
-					<NeighborLinkFractionCode><![CDATA[0.95]]></NeighborLinkFractionCode>
-					<MCode><![CDATA[10]]></MCode>
-			</EnvironmentProperties>
-			<DatasetsCreationProperties>
-				<AutoCreate>false</AutoCreate>
-				<RecurrenceCode><![CDATA[1]]></RecurrenceCode>
-			</DatasetsCreationProperties>
-			<ConnectionsId>1422734046612</ConnectionsId>
-			<Variables>
-				<Variable Class="PlainVariable">
-					<Id>1422739182217</Id>
-					<Name><![CDATA[width]]></Name>
-					<X>15</X><Y>80</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="true">
-						<Type><![CDATA[double]]></Type>        
-						<InitialValue><![CDATA[40.0]]></InitialValue>                 	
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1422739205110</Id>
-					<Name><![CDATA[height]]></Name>
-					<X>15</X><Y>105</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="true">
-						<Type><![CDATA[double]]></Type>        
-						<InitialValue><![CDATA[40.0]]></InitialValue>                 	
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1422740853620</Id>
-					<Name><![CDATA[verticalOffset]]></Name>
-					<X>15</X><Y>125</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="true">
-						<Type><![CDATA[double]]></Type>        
-						<InitialValue><![CDATA[10.0]]></InitialValue>                 	
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1422741096503</Id>
-					<Name><![CDATA[horizontalOffset]]></Name>
-					<X>15</X><Y>145</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="true" AccessType="public" StaticVariable="true">
-						<Type><![CDATA[double]]></Type>        
-						<InitialValue><![CDATA[20.0]]></InitialValue>                 	
-					</Properties>
-				</Variable>
-				<Variable Class="PlainVariable">
-					<Id>1422784153635</Id>
-					<Name><![CDATA[count]]></Name>
-					<X>15</X><Y>55</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" Constant="false" AccessType="private" StaticVariable="false">
-						<Type><![CDATA[int]]></Type>        
-						<InitialValue><![CDATA[0]]></InitialValue>                 	
-					</Properties>
-				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1422735396562</Id>
-					<Name><![CDATA[inParticles]]></Name>
-					<X>60</X><Y>10</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="private" StaticVariable="false">
-						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[Integer]]></ElementClass>
-						<ValueElementClass><![CDATA[String]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1422735413094</Id>
-					<Name><![CDATA[outParticles]]></Name>
-					<X>60</X><Y>30</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="private" StaticVariable="false">
-						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[Integer]]></ElementClass>
-						<ValueElementClass><![CDATA[String]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1422735483452</Id>
-					<Name><![CDATA[neighbours]]></Name>
-					<X>70</X><Y>50</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="private" StaticVariable="false">
-						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[HCell]]></ElementClass>
-						<ValueElementClass><![CDATA[String]]></ValueElementClass>
-					</Properties>
-
-				</Variable>
-			</Variables>
-			<Functions>
-				<Function AccessType="private" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[int]]></ReturnType>
-					<Id>1422735704929</Id>
-					<Name><![CDATA[getInCount]]></Name>
-					<Description><![CDATA[returns number of not null in-particles]]></Description> 
-					<X>20</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[int count = 0;
-for (int i=0; i<6; i++) {
-	if (this.inParticles.get(i) != null) count++;
-}
-return count;]]></Body>
-				</Function>
-				<Function AccessType="private" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[int]]></ReturnType>
-					<Id>1422735745474</Id>
-					<Name><![CDATA[getOutCount]]></Name>
-					<Description><![CDATA[returns number of not null out-particles]]></Description> 
-					<X>15</X><Y>170</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[int count = 0;
-for (int i=0; i<6; i++) {
-	if (this.outParticles.get(i) != null) count++;
-}
-return count;]]></Body>
-				</Function>
-				<Function AccessType="private" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422735904730</Id>
-					<Name><![CDATA[performMovement]]></Name>
-					<Description><![CDATA[Will check the neighbours and move particles that are supposed to come here to this cell.<br>
-if particles hit a wall (no neighbour in the given direction) they will instead STAY in<br>
-the cell but be moved in the opposite in-particle slow.<br>
-So e.g.: out.E will go to in.W]]></Description> 
-					<X>115</X><Y>170</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (this.count==0) return;
-for (int i=0; i<6; i++) {
-	Tools.Direction dir = Tools.Direction.fromInt(i);
-	Tools.Direction oppDir = Tools.Direction.opposite(dir);
-	Integer p = this.outParticles.get(dir.getValue());
-	if (p==null) continue;
-	HCell neighbour = this.getNeighbour(dir);
-	this.outParticles.set(dir.getValue(), null);
-	if (neighbour != null) {
-		neighbour.recieveParticleFrom(this, p);
-		this.count--;
-	} else {
-		// we've hit a wall
-		this.inParticles.set(oppDir.getValue(), p);
-	}
-}]]></Body>
-				</Function>
-				<Function AccessType="private" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422735983210</Id>
-					<Name><![CDATA[rotateClockwise]]></Name>
-					<Description><![CDATA[rotates the out-particles in the HexCell clockwise.<br>
-meaning: e.g. outParticles.E will be outParticles.NE
-]]></Description> 
-					<X>20</X><Y>210</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[//System.out.println("rotateClockwise");
-Integer temp = this.outParticles.get(0);
-for (int i=0; i<5; i++) {
-	this.outParticles.set(i, this.outParticles.get(i+1));
-}
-this.outParticles.set(5, temp);]]></Body>
-				</Function>
-				<Function AccessType="private" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422736025585</Id>
-					<Name><![CDATA[rotateCounterClockwise]]></Name>
-					<Description><![CDATA[rotates the out-particles in the HexCell counterclockwise.<br>
-meaning: e.g. outParticles.E will be outParticles.SE]]></Description> 
-					<X>20</X><Y>230</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[//System.out.println("rotateCounterClockwise");
-Integer temp = this.outParticles.get(5);
-for (int i=5; i>0; i--) {
-	this.outParticles.set(i, this.outParticles.get(i-1));
-}
-this.outParticles.set(0, temp);]]></Body>
-				</Function>
-				<Function AccessType="public" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422736090953</Id>
-					<Name><![CDATA[recieveParticleFrom]]></Name>
-					<Description><![CDATA[Will autodetect the direction from which the particle is coming
-@param neighbour - must be neighbour, not null
-@param newParticle - null is valid]]></Description> 
-					<X>85</X><Y>70</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[neighbour]]></Name>
-						<Type><![CDATA[HCell]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[newParticle]]></Name>
-						<Type><![CDATA[Integer]]></Type>
-					</Parameter>
-					<Body><![CDATA[if (neighbour == null) throw new NullPointerException("Input neighbour is null");
-for (int i=0; i<6; i++) {
-	if (neighbour.equals(this.neighbours.get(i))) {
-		Tools.Direction dir = Tools.Direction.opposite(Tools.Direction.fromInt(i));
-		this.inParticles.set(dir.getValue(), newParticle);
-		count++;
-		return;
-	}
-}
-throw new RuntimeException("Input neighbour is not a neighbour of this cell.");]]></Body>
-				</Function>
-				<Function AccessType="public" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[HCell]]></ReturnType>
-					<Id>1422736181716</Id>
-					<Name><![CDATA[getNeighbour]]></Name>
-					<Description><![CDATA[Returns the neighbour that is in the input direction from this cell]]></Description> 
-					<X>85</X><Y>90</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[direction]]></Name>
-						<Type><![CDATA[Tools.Direction]]></Type>
-					</Parameter>
-					<Body><![CDATA[if (direction==null) throw new NullPointerException("Input direction is null");
-return this.neighbours.get(direction.getValue());]]></Body>
-				</Function>
-				<Function AccessType="public" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422736353978</Id>
-					<Name><![CDATA[setNeighbour]]></Name>
-					<Description><![CDATA[The direction refers to the direction you need to go from "this" cell<br>
-to reach the neighbour
-@param neighbour - may be null, may not exist for another direction
-@param direction - not null]]></Description> 
-					<X>100</X><Y>110</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[neighbour]]></Name>
-						<Type><![CDATA[HCell]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[direction]]></Name>
-						<Type><![CDATA[Tools.Direction]]></Type>
-					</Parameter>
-					<Body><![CDATA[if (direction==null) throw new NullPointerException("Input direction is null");
-if (neighbour != null && this.neighbours.contains(neighbour) && !neighbour.equals(this.neighbours.get(direction.getValue()))) {
-	throw new RuntimeException("The input neighbour is already set in this HexCell for a different direction.");
-}
-this.neighbours.set(direction.getValue(), neighbour);
-]]></Body>
-				</Function>
-				<Function AccessType="private" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422736529691</Id>
-					<Name><![CDATA[performCollision]]></Name>
-					<Description><![CDATA[After movement
-Takes in-particles and performs collisions on them]]></Description> 
-					<X>120</X><Y>150</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (this.count==0) return;
-int count = this.count;//this.getInCount();
-if (count <0 || count > 6) throw new RuntimeException("Invalid count "+count);
-
-for (int i=0; i<6; i++) {
-	this.outParticles.set(i, this.inParticles.get(i));
-	this.inParticles.set(i, null);
-}
-
-if (count==0) return; // no collision
-else if (count==1) {
-	//System.out.println("Count 1; no collision");
-	return; // no collision
-} else if (count==2) { // possible collision(s)
-	//System.out.println("inParticles:"+this.inParticles.toString());
-	if (outParticles.get(Tools.Direction.E.getValue()) != null && outParticles.get(Tools.Direction.W.getValue()) != null) {
-		//collision 50% chance
-		if (Tools.random.nextBoolean()) {
-			//System.out.println("Count 2; E-W rotateClockwise");
-			this.rotateClockwise();
-		} else {
-			//System.out.println("Count 2; E-W rotateCounterClockwise");
-			this.rotateCounterClockwise();
-		}
-		return;
-	} else if (outParticles.get(Tools.Direction.NE.getValue()) !=null && outParticles.get(Tools.Direction.SW.getValue())!=null) {
-		//collision 50% chance
-		if (Tools.random.nextBoolean()) {
-			//System.out.println("Count 2; NE-SW rotateClockwise");
-			this.rotateClockwise();
-		} else {
-			//System.out.println("Count 2; NE-SW rotateCounterClockwise");
-			this.rotateCounterClockwise();
-		}
-		return;
-	} else if (outParticles.get(Tools.Direction.NW.getValue()) !=null && outParticles.get(Tools.Direction.SE.getValue())!=null) {
-		//collision 50% chance
-		if (Tools.random.nextBoolean()) {
-			//System.out.println("Count 2; NW-SE rotateClockwise");
-			this.rotateClockwise();
-		} else {
-			//System.out.println("Count 2; NW-SE rotateCounterClockwise");
-			this.rotateCounterClockwise();
-		}
-		return;
-	} else {
-		//System.out.println("Count 2; no collision");
-		// no collision
-		
-	}
-} else if (count > 2) { // certain collision
-	//System.out.println("Count 3; rotateClockwise");
-	this.rotateClockwise();
-}
-//System.out.println(this.outParticles.toString());]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422742389430</Id>
-					<Name><![CDATA[updateRepresentation]]></Name>
-					<X>120</X><Y>190</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[/*if (this.outParticles.get(Tools.Direction.E.getValue()) != null) {
-	this.R_E.setVisible(true);
-} else {
-	this.R_E.setVisible(false);
-}
-
-if (this.outParticles.get(Tools.Direction.NE.getValue()) != null) {
-	this.R_NE.setVisible(true);
-} else {
-	this.R_NE.setVisible(false);
-}
-
-if (this.outParticles.get(Tools.Direction.NW.getValue()) != null) {
-	this.R_NW.setVisible(true);
-} else {
-	this.R_NW.setVisible(false);
-}
-
-if (this.outParticles.get(Tools.Direction.W.getValue()) != null) {
-	this.R_W.setVisible(true);
-} else {
-	this.R_W.setVisible(false);
-}
-
-if (this.outParticles.get(Tools.Direction.SW.getValue()) != null) {
-	this.R_SW.setVisible(true);
-} else {
-	this.R_SW.setVisible(false);
-}
-
-if (this.outParticles.get(Tools.Direction.SE.getValue()) != null) {
-	this.R_SE.setVisible(true);
-} else {
-	this.R_SE.setVisible(false);
-}*/
-Color col = null;
-if (this.outParticles.get(Tools.Direction.E.getValue())!=null) {
-	switch(this.hexGrid.particles.get(this.outParticles.get(Tools.Direction.E.getValue())).getState()) {
-		case INFECTED: col=Color.RED;break;
-		case RECOVERED: col=Color.GREEN;break;
-		case SUSCEPTIBLE: col=Color.GRAY;break;
-	}
-	this.R_E.setFillColor(col);
-} else {
-	this.R_E.setFillColor(Color.WHITE);
-}
-if (this.outParticles.get(Tools.Direction.NE.getValue())!=null) {
-	switch(this.hexGrid.particles.get(this.outParticles.get(Tools.Direction.NE.getValue())).getState()) {
-		case INFECTED: col=Color.RED;break;
-		case RECOVERED: col=Color.GREEN;break;
-		case SUSCEPTIBLE: col=Color.GRAY;break;
-	}
-	this.R_NE.setFillColor(col);
-} else {
-	this.R_NE.setFillColor(Color.WHITE);
-}
-if (this.outParticles.get(Tools.Direction.NW.getValue())!=null) {
-	switch(this.hexGrid.particles.get(this.outParticles.get(Tools.Direction.NW.getValue())).getState()) {
-		case INFECTED: col=Color.RED;break;
-		case RECOVERED: col=Color.GREEN;break;
-		case SUSCEPTIBLE: col=Color.GRAY;break;
-	}
-	this.R_NW.setFillColor(col);
-} else {
-	this.R_NW.setFillColor(Color.WHITE);
-}
-if (this.outParticles.get(Tools.Direction.W.getValue())!=null) {
-	switch(this.hexGrid.particles.get(this.outParticles.get(Tools.Direction.W.getValue())).getState()) {
-		case INFECTED: col=Color.RED;break;
-		case RECOVERED: col=Color.GREEN;break;
-		case SUSCEPTIBLE: col=Color.GRAY;break;
-	}
-	this.R_W.setFillColor(col);
-} else {
-	this.R_W.setFillColor(Color.WHITE);
-}
-if (this.outParticles.get(Tools.Direction.SW.getValue())!=null) {
-	switch(this.hexGrid.particles.get(this.outParticles.get(Tools.Direction.SW.getValue())).getState()) {
-		case INFECTED: col=Color.RED;break;
-		case RECOVERED: col=Color.GREEN;break;
-		case SUSCEPTIBLE: col=Color.GRAY;break;
-	}
-	this.R_SW.setFillColor(col);
-} else {
-	this.R_SW.setFillColor(Color.WHITE);
-}
-if (this.outParticles.get(Tools.Direction.SE.getValue())!=null) {
-	switch(this.hexGrid.particles.get(this.outParticles.get(Tools.Direction.SE.getValue())).getState()) {
-		case INFECTED: col=Color.RED;break;
-		case RECOVERED: col=Color.GREEN;break;
-		case SUSCEPTIBLE: col=Color.GRAY;break;
-	}
-	this.R_SE.setFillColor(col);
-} else {
-	this.R_SE.setFillColor(Color.WHITE);
-}
-//for (int i=0; i<6; i++) {
-	//Point p = this.getParticlePosition(Tools.Direction.fromInt(i));
-	//if (this.outParticles.get(i) != null) {
-		//Particle pa = this.hexGrid.particles.get(this.outParticles.get(i));
-		//pa.setXY(this.getX()+p.x, this.getY()+p.y);
-	//} else {
-	//}
-//}]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422746293824</Id>
-					<Name><![CDATA[setParticle]]></Name>
-					<X>110</X><Y>130</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[direction]]></Name>
-						<Type><![CDATA[Tools.Direction]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[particle]]></Name>
-						<Type><![CDATA[Integer]]></Type>
-					</Parameter>
-					<Body><![CDATA[this.outParticles.set(direction.getValue(), particle);
-this.count++;]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[Point]]></ReturnType>
-					<Id>1422746898998</Id>
-					<Name><![CDATA[getParticlePosition]]></Name>
-					<X>130</X><Y>210</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[direction]]></Name>
-						<Type><![CDATA[Tools.Direction]]></Type>
-					</Parameter>
-					<Body><![CDATA[if (direction==null) throw new NullPointerException("Input direction is null");
-Point p = new Point();
-switch(direction) {
-	case W:  p.x=29;p.y=15;return p;
-	case SW: p.x=21;p.y=4; return p;
-	case SE: p.x=8; p.y=4; return p;
-	case E:  p.x=0; p.y=15;return p;
-	case NE: p.x=8; p.y=25;return p;
-	case NW: p.x=21;p.y=25;return p;
-}
-return null;]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422787426387</Id>
-					<Name><![CDATA[performInfections]]></Name>
-					<X>20</X><Y>250</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (this.count==0) return;
-ArrayList<Integer> existing = new ArrayList<Integer>();
-for (Integer p: this.outParticles) {
-	if (p!=null) {
-		existing.add(p);
-	}
-}
-//System.out.println("performInfections() "+existing);
-for (Integer p1 : existing) {
-	for (Integer p2 : existing) {
-		if (p1 != p2) {
-			if (this.hexGrid.particles.get(p1).isInfected()) {
-				if (this.hexGrid.particles.get(p2).isSusceptible() && this.hexGrid.particles.get(p1).willInfect(this.hexGrid.infectionProbability)) {
-					this.hexGrid.particles.get(p2).infect();
-					this.hexGrid.numInfected++;
-					this.hexGrid.numSusceptible--;
-					if (this.hexGrid.debugOutput) {
-						System.out.println(this.hexGrid.particles.get(p1).toString()+"["+this.toString()+"] infects "+this.hexGrid.particles.get(p2).toString()+"["+this.toString()+"]");
-					}
-				}
-			}
-		}
-		
-	}
-}]]></Body>
-				</Function>
-				<Function AccessType="public" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1422892426249</Id>
-					<Name><![CDATA[clearParticles]]></Name>
-					<Description><![CDATA[Sets all in- and outparticles null]]></Description> 
-					<X>160</X><Y>230</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[for (int i=0; i<6; i++) {
-	this.inParticles.set(i, null);
-	this.outParticles.set(i, null);
-}
-this.count = 0;]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1423012683224</Id>
-					<Name><![CDATA[performRecoveries]]></Name>
-					<X>140</X><Y>250</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (this.count==0) return;
-ArrayList<Integer> existing = new ArrayList<Integer>();
-for (Integer p: this.outParticles) {
-	if (p!=null) {
-		existing.add(p);
-	}
-}
-//System.out.println("performInfections() "+existing);
-for (Integer p1 : existing) {
-	if (this.hexGrid.particles.get(p1).isInfected() && this.hexGrid.particles.get(p1).tryToRecover(this.hexGrid.recoveryProbabilibty, this.hexGrid.debugOutput)) {
-		this.hexGrid.numInfected--;
-		this.hexGrid.numRecovered++;
-	}
-	
-}]]></Body>
-				</Function>
-			</Functions>
-			<AgentLinks>
-				<AgentLink>
-					<Id>1422734046612</Id>
-					<Name><![CDATA[connections]]></Name>
-					<X>20</X><Y>-20</Y>
-					<Label><X>15</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<HandleReceiveInConnections>false</HandleReceiveInConnections>
-					<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
-					<AgentLinkBidirectional>true</AgentLinkBidirectional>
-					<MessageType><![CDATA[Object]]></MessageType>
-					<LineStyle>SOLID</LineStyle>
-					<LineWidth>1</LineWidth>
-					<LineColor>-16777216</LineColor>
-					<LineZOrder>UNDER_AGENTS</LineZOrder>
-					<LineArrow>NONE</LineArrow>
-					<LineArrowPosition>END</LineArrowPosition>
-				</AgentLink>
-			</AgentLinks>
-
-			<ContainerLinks>
-				<ContainerLink>
-					<Id>1422737978299</Id>
-					<Name><![CDATA[hexGrid]]></Name>
-					<X>20</X><Y>-40</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ActiveObjectClass>
-						<PackageName><![CDATA[lgcac17]]></PackageName>
-						<ClassName><![CDATA[HexGrid]]></ClassName>
-					</ActiveObjectClass>
-				</ContainerLink>
-			</ContainerLinks>
-
-			<Shapes>
-				<Polyline>
-					<Id>1422741866414</Id>
-					<Name><![CDATA[R_SW]]></Name>
-					<X>40</X><Y>10</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<ZHeight>9</ZHeight>
-					<LineWidth>1</LineWidth>
-					<LineColor/>
-					<LineMaterial>null</LineMaterial>
-					<LineStyle>SOLID</LineStyle>
-					<BeginArrowSize>1</BeginArrowSize>
-					<BeginArrowStyle>0</BeginArrowStyle>
-					<EndArrowSize>1</EndArrowSize>
-					<EndArrowStyle>0</EndArrowStyle>
-					<FillColor>-4144960</FillColor>
-					<FillMaterial>null</FillMaterial>
-					<Points>
-					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-					   <Point><X>-20</X><Y>-10</Y><Z>0</Z></Point>
-					   <Point><X>-20</X><Y>10</Y><Z>0</Z></Point>
-					</Points>
-					<Closed>false</Closed>
-				</Polyline>
-				<Polyline>
-					<Id>1422741983778</Id>
-					<Name><![CDATA[R_NW]]></Name>
-					<X>40</X><Y>30</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<ZHeight>9</ZHeight>
-					<LineWidth>1</LineWidth>
-					<LineColor/>
-					<LineMaterial>null</LineMaterial>
-					<LineStyle>SOLID</LineStyle>
-					<BeginArrowSize>1</BeginArrowSize>
-					<BeginArrowStyle>0</BeginArrowStyle>
-					<EndArrowSize>1</EndArrowSize>
-					<EndArrowStyle>0</EndArrowStyle>
-					<FillColor>-4144960</FillColor>
-					<FillMaterial>null</FillMaterial>
-					<Points>
-					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-					   <Point><X>-20</X><Y>-10</Y><Z>0</Z></Point>
-					   <Point><X>-20</X><Y>10</Y><Z>0</Z></Point>
-					</Points>
-					<Closed>false</Closed>
-				</Polyline>
-				<Polyline>
-					<Id>1422742003211</Id>
-					<Name><![CDATA[R_E]]></Name>
-					<X>20</X><Y>20</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<ZHeight>9</ZHeight>
-					<LineWidth>1</LineWidth>
-					<LineColor/>
-					<LineMaterial>null</LineMaterial>
-					<LineStyle>SOLID</LineStyle>
-					<BeginArrowSize>1</BeginArrowSize>
-					<BeginArrowStyle>0</BeginArrowStyle>
-					<EndArrowSize>1</EndArrowSize>
-					<EndArrowStyle>0</EndArrowStyle>
-					<FillColor>-4144960</FillColor>
-					<FillMaterial>null</FillMaterial>
-					<Points>
-					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-					   <Point><X>-20</X><Y>-10</Y><Z>0</Z></Point>
-					   <Point><X>-20</X><Y>10</Y><Z>0</Z></Point>
-					</Points>
-					<Closed>false</Closed>
-				</Polyline>
-				<Polyline>
-					<Id>1422742013512</Id>
-					<Name><![CDATA[R_W]]></Name>
-					<X>20</X><Y>20</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<ZHeight>9</ZHeight>
-					<LineWidth>1</LineWidth>
-					<LineColor/>
-					<LineMaterial>null</LineMaterial>
-					<LineStyle>SOLID</LineStyle>
-					<BeginArrowSize>1</BeginArrowSize>
-					<BeginArrowStyle>0</BeginArrowStyle>
-					<EndArrowSize>1</EndArrowSize>
-					<EndArrowStyle>0</EndArrowStyle>
-					<FillColor>-4144960</FillColor>
-					<FillMaterial>null</FillMaterial>
-					<Points>
-					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-					   <Point><X>20</X><Y>-10</Y><Z>0</Z></Point>
-					   <Point><X>20</X><Y>10</Y><Z>0</Z></Point>
-					</Points>
-					<Closed>false</Closed>
-				</Polyline>
-				<Polyline>
-					<Id>1422742031934</Id>
-					<Name><![CDATA[R_SE]]></Name>
-					<X>0</X><Y>10</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<ZHeight>9</ZHeight>
-					<LineWidth>1</LineWidth>
-					<LineColor/>
-					<LineMaterial>null</LineMaterial>
-					<LineStyle>SOLID</LineStyle>
-					<BeginArrowSize>1</BeginArrowSize>
-					<BeginArrowStyle>0</BeginArrowStyle>
-					<EndArrowSize>1</EndArrowSize>
-					<EndArrowStyle>0</EndArrowStyle>
-					<FillColor>-4144960</FillColor>
-					<FillMaterial>null</FillMaterial>
-					<Points>
-					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-					   <Point><X>20</X><Y>-10</Y><Z>0</Z></Point>
-					   <Point><X>20</X><Y>10</Y><Z>0</Z></Point>
-					</Points>
-					<Closed>false</Closed>
-				</Polyline>
-				<Polyline>
-					<Id>1422742046286</Id>
-					<Name><![CDATA[R_NE]]></Name>
-					<X>0</X><Y>30</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<ZHeight>9</ZHeight>
-					<LineWidth>1</LineWidth>
-					<LineColor/>
-					<LineMaterial>null</LineMaterial>
-					<LineStyle>SOLID</LineStyle>
-					<BeginArrowSize>1</BeginArrowSize>
-					<BeginArrowStyle>0</BeginArrowStyle>
-					<EndArrowSize>1</EndArrowSize>
-					<EndArrowStyle>0</EndArrowStyle>
-					<FillColor>-4144960</FillColor>
-					<FillMaterial>null</FillMaterial>
-					<Points>
-					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
-					   <Point><X>20</X><Y>-10</Y><Z>0</Z></Point>
-					   <Point><X>20</X><Y>10</Y><Z>0</Z></Point>
-					</Points>
-					<Closed>false</Closed>
-				</Polyline>
-			</Shapes>
-
-		</ActiveObjectClass>
-		<!--   =========   Active Object Class   ========  -->
-		<ActiveObjectClass>
 			<Id>1422734692361</Id>
 			<Name><![CDATA[HexGrid]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
-			<StartupCode><![CDATA[createHexGrid();
+			<StartupCode><![CDATA[System.out.println("HexGrid onStartup start");
+this.initHCells();
+System.out.println("HexGrid onStartup initHCells done");
+createHexGrid();
+System.out.println("HexGrid onStartup createHexGrid done");
 initParticles();
+System.out.println("HexGrid onStartup initParticles done");
 populateHCells();
+System.out.println("HexGrid onStartup populateHCells done");
 //populateHCellsCustom();
-System.out.println("Grid created");]]></StartupCode>
+System.out.println("HexGrid onStartup end");]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameters><![CDATA[T]]></GenericParameters>
 			<GenericParametersLabel><![CDATA[Generic parameters:]]></GenericParametersLabel>
@@ -1278,6 +366,21 @@ System.out.println("Grid created");]]></StartupCode>
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1423056190555</Id>
+					<Name><![CDATA[hCells]]></Name>
+					<X>260</X><Y>-20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[HCell]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -1298,15 +401,15 @@ int cellCounter = 0;
 boolean topIsLeft=true;
 for (int r=0; r<numRows; r++) {
 	topIsLeft = !topIsLeft;
-	ArrayList<Integer> row = new ArrayList<HCell>();
+	ArrayList<Integer> row = new ArrayList<Integer>();
 	for (int c=0; c<numColumns; c++) {
 		HCell hc = this.hCells.get(cellCounter);
 		int hcInd=cellCounter;
 		cellCounter++;
 		if (c>0) { // set horizontal neighbours
-			HCell prev = row.get(c-1);
-			prev.setNeighbour(hc, Tools.Direction.E);
-			hc.setNeighbour(prev, Tools.Direction.W);
+			HCell prev = this.hCells.get(row.get(c-1));
+			prev.setNeighbour(hc.getIndex(), Tools.Direction.E);
+			hc.setNeighbour(prev.getIndex(), Tools.Direction.W);
 		}
 		if (r>0) { // set NE and NW neighbours
 			int previousRow = r-1;
@@ -1321,11 +424,11 @@ for (int r=0; r<numRows; r++) {
 						nw = this.hCells.get(this.map.get(previousRow).get(c-1));
 						ne = this.hCells.get(this.map.get(previousRow).get(c));
 					}
-					hc.setNeighbour(nw, Tools.Direction.NW);
-					nw.setNeighbour(hc, Tools.Direction.SE);
+					hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
+					nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
 					
-					hc.setNeighbour(ne, Tools.Direction.NE);
-					ne.setNeighbour(hc, Tools.Direction.SW);
+					hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
+					ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
 					
 				} else { //if (c<(numColumns-1)) {
 					//border right
@@ -1333,8 +436,8 @@ for (int r=0; r<numRows; r++) {
 						HCell nw = null;
 						nw = this.hCells.get(this.map.get(previousRow).get(c));
 						
-						hc.setNeighbour(nw, Tools.Direction.NW);
-						nw.setNeighbour(hc, Tools.Direction.SE);
+						hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
+						nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
 					} else { //if (topIsLeft) {
 						HCell nw = null;
 						HCell ne = null;
@@ -1342,11 +445,11 @@ for (int r=0; r<numRows; r++) {
 						nw = this.hCells.get(this.map.get(previousRow).get(c-1));
 						ne = this.hCells.get(this.map.get(previousRow).get(c));
 						
-						hc.setNeighbour(nw, Tools.Direction.NW);
-						nw.setNeighbour(hc, Tools.Direction.SE);
+						hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
+						nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
 						
-						hc.setNeighbour(ne, Tools.Direction.NE);
-						ne.setNeighbour(hc, Tools.Direction.SW);
+						hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
+						ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
 					}
 				}
 			} else { // if (c>0) {
@@ -1358,18 +461,18 @@ for (int r=0; r<numRows; r++) {
 					nw = this.hCells.get(this.map.get(previousRow).get(c));
 					ne = this.hCells.get(this.map.get(previousRow).get(c+1));
 					
-					hc.setNeighbour(nw, Tools.Direction.NW);
-					nw.setNeighbour(hc, Tools.Direction.SE);
+					hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
+					nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
 					
-					hc.setNeighbour(ne, Tools.Direction.NE);
-					ne.setNeighbour(hc, Tools.Direction.SW);
+					hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
+					ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
 				} else {
 					HCell ne = null;
 					
 					ne = this.hCells.get(this.map.get(previousRow).get(c));
 
-					hc.setNeighbour(ne, Tools.Direction.NE);
-					ne.setNeighbour(hc, Tools.Direction.SW);
+					hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
+					ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
 				}
 			} // if (c>0) {
 		} //if (r>0) {
@@ -1403,9 +506,9 @@ for (int r=0; r<numRows; r++) {
 								this.rectangle.getY()+(r*HCell.height)+offsetY);
 	}
 }
-
-this.datagraph.setX(this.rectangle.getX()+340);
-this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
+//TODO: fix
+//this.datagraph.setX(this.rectangle.getX()+340);
+//this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1421,12 +524,14 @@ this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
 					<Body><![CDATA[ArrayList<Integer> index = new ArrayList<Integer>();
 
 this.clearAllParticles();
+System.out.println("populateHCells clearAllParticles done");
 
 for (int i=0; i<(6*this.hCells.size()); i++) {
 	index.add(i);
 }
-index = Tools.shuffleArrayList(index);
-
+//index = Tools.shuffleArrayList(index);
+Collections.shuffle(index);
+System.out.println("populateHCells index shuffled");
 // will contain Particle initialization
 for (int i=0; i<particles.size(); i++) {
 	int n = index.remove(0);
@@ -1508,6 +613,25 @@ for (int i=0; i<index.size(); i++) {
 	c.clearParticles();
 }]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1423056223320</Id>
+					<Name><![CDATA[initHCells]]></Name>
+					<X>120</X><Y>-80</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[this.hCells = new ArrayList<HCell>();
+
+int num = this.numColumns*this.numRows;
+
+for (int i=0; i<num; i++) {
+	HCell c = new HCell(i);
+	this.hCells.add(c);
+}]]></Body>
+				</Function>
 			</Functions>
 			<AgentLinks>
 				<AgentLink>
@@ -1532,37 +656,6 @@ for (int i=0; i<index.size(); i++) {
 			</AgentLinks>
 
 			<EmbeddedObjects>
-				<EmbeddedObject>
-					<Id>0</Id>
-					<Name><![CDATA[hCells]]></Name>
-					<X>280</X><Y>-40</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<PresentationId>1422740651600</PresentationId>
-					<ActiveObjectClass>
-						<PackageName><![CDATA[lgcac17]]></PackageName>
-						<ClassName><![CDATA[HCell]]></ClassName>
-					</ActiveObjectClass>
-					<GenericParametersSubstitute><![CDATA[]]></GenericParametersSubstitute>
-					<Parameters>
-					</Parameters>
-					<ReplicationFlag>true</ReplicationFlag>
-					
-					<Replication><![CDATA[this.numColumns*this.numRows]]></Replication>
-					
-					<CollectionType>ARRAY_LIST_BASED</CollectionType>
-					<InEnvironment>true</InEnvironment>	
-					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
-					<XCode><![CDATA[0]]></XCode>
-					<YCode><![CDATA[0]]></YCode>
-					<ZCode><![CDATA[0]]></ZCode>
-					<ColumnCode><![CDATA[0]]></ColumnCode>
-					<RowCode><![CDATA[0]]></RowCode>
-					<LatitudeCode><![CDATA[0]]></LatitudeCode>
-					<LongitudeCode><![CDATA[0]]></LongitudeCode>
-				</EmbeddedObject>
 				<EmbeddedObject>
 					<Id>0</Id>
 					<Name><![CDATA[clock]]></Name>
@@ -1620,23 +713,6 @@ for (int i=0; i<index.size(); i++) {
 					<FillColor/>
 					<FillMaterial>null</FillMaterial>
 				</Rectangle>
-				<EmbeddedObjectPresentation>
-					<Id>1422740651600</Id>
-					<Name><![CDATA[hCells_presentation]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<ReplicationCode><![CDATA[hCells.size()]]></ReplicationCode>
-					<AsObject>true</AsObject>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-				</EmbeddedObjectPresentation>
 				<Group>
 					<Id>1422800169882</Id>
 					<Name><![CDATA[datagraph]]></Name>
@@ -1932,12 +1008,22 @@ for (int i=0; i<index.size(); i++) {
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode><![CDATA[10]]></VelocityCode>
-				<BeforeStepCode><![CDATA[if (this.hexGrid.randomizeParticleLocationsBeforeEachStep) {
+				<AfterStepCode><![CDATA[System.out.println("Clock onStep start");
+for (HCell c : this.hexGrid.hCells) {
+	c.onStep(this.hexGrid);
+}
+System.out.println("Clock onStep end");]]></AfterStepCode>
+				<BeforeStepCode><![CDATA[System.out.println("Clock onBeforeStep start");
+for (HCell c : this.hexGrid.hCells) {
+	c.onBeforeStep(this.hexGrid);
+}
+if (this.hexGrid.randomizeParticleLocationsBeforeEachStep) {
 	//System.out.println("random");
 	this.hexGrid.populateHCells();
 } else {
 	//(System.out.println("no random");
-}]]></BeforeStepCode>
+}
+System.out.println("Clock onBeforeStep end");]]></BeforeStepCode>
 				<VelocityGISCode><![CDATA[10]]></VelocityGISCode>
 			</AgentProperties>
 			<EnvironmentProperties>
@@ -2813,6 +1899,7 @@ public class Tools implements Serializable {
 			this.y=y;
 		}
 	}
+
 	public static enum Status {
 		SUSCEPTIBLE,
 		INFECTED,
@@ -2940,6 +2027,470 @@ public class Particle implements Serializable {
 	}
 
 }]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1423055765759</Id>
+			<Name><![CDATA[HCell]]></Name>
+			<Text><![CDATA[import lgcac17.Tools.Direction;
+import lgcac17.Tools.Status;
+/**
+ * HCell
+ */	
+public class HCell implements Serializable{
+	public HCell(int index) {
+		if (index < 0) throw new RuntimeException("Index < 0");
+		this.index = index;
+		this.onStartup();
+	}
+	private int index;
+	public int getIndex() {
+		return this.index;
+	}
+	// Parameters
+	// Plain Variables
+	private double xLocation = 0.0;
+	private double yLocation = 0.0;
+
+	public void setXY(double x, double y) {
+		this.xLocation = x; this.yLocation = y;
+	}
+	public double getX() {
+		return this.xLocation;
+	}
+	public double getY() {
+		return this.yLocation;
+	}
+	public static final 
+	double 
+	width = 
+	40.0 
+	;
+	public static final 
+	double 
+	height = 
+	40.0 
+	;
+	public static final 
+	double 
+	verticalOffset = 
+	10.0 
+	;
+	public static final 
+	double 
+	horizontalOffset = 
+	20.0 
+	;
+	private  int count;
+	// Collection Variables
+	private 
+	java.util.ArrayList <
+	Integer > inParticles = new java.util.ArrayList<Integer>();
+	private 
+	java.util.ArrayList <
+	Integer > outParticles = new java.util.ArrayList<Integer>();
+	private 
+	java.util.ArrayList <Integer> neighbours = new java.util.ArrayList<Integer>();
+	private HCell getHCell(int index, HexGrid hexGrid) {
+		if (index<0) throw new RuntimeException("index < 0 "+index);
+		return hexGrid.hCells.get(index);
+	}
+	/**
+	 * Will check the neighbours and move particles that are supposed to come here to this cell.<br><br>
+	 * if particles hit a wall (no neighbour in the given direction) they will instead STAY in<br><br>
+	 * the cell but be moved in the opposite in-particle slow.<br><br>
+	 * So e.g.: out.E will go to in.W
+	 */
+	private void performMovement(HexGrid hexGrid) { 
+
+		if (this.count==0) return;
+		for (int i=0; i<6; i++) {
+			Tools.Direction dir = Tools.Direction.fromInt(i);
+			Tools.Direction oppDir = Tools.Direction.opposite(dir);
+			Integer p = this.outParticles.get(dir.getValue());
+			if (p==null) continue;
+			HCell neighbour = this.getNeighbour(dir, hexGrid);
+			this.outParticles.set(dir.getValue(), null);
+			if (neighbour != null) {
+				neighbour.recieveParticleFrom(this, p);
+				this.count--;
+			} else {
+				// we've hit a wall
+				this.inParticles.set(oppDir.getValue(), p);
+			}
+		} 
+	}
+
+	/**
+	 * rotates the out-particles in the HexCell clockwise.<br><br>
+	 * meaning: e.g. outParticles.E will be outParticles.NE
+	 */
+	private void rotateClockwise(  ) { 
+
+		//System.out.println("rotateClockwise");
+		Integer temp = this.outParticles.get(0);
+		for (int i=0; i<5; i++) {
+			this.outParticles.set(i, this.outParticles.get(i+1));
+		}
+		this.outParticles.set(5, temp); 
+	}
+
+	/**
+	 * rotates the out-particles in the HexCell counterclockwise.<br><br>
+	 * meaning: e.g. outParticles.E will be outParticles.SE
+	 */
+	private void rotateCounterClockwise(  ) { 
+
+		//System.out.println("rotateCounterClockwise");
+		Integer temp = this.outParticles.get(5);
+		for (int i=5; i>0; i--) {
+			this.outParticles.set(i, this.outParticles.get(i-1));
+		}
+		this.outParticles.set(0, temp); 
+	}
+
+	/**
+	 * Will autodetect the direction from which the particle is coming<br>
+	 * @param neighbour - must be neighbour, not null<br>
+	 * @param newParticle - null is valid
+	 */
+	public void recieveParticleFrom( HCell neighbour, Integer newParticle ) { 
+
+		if (neighbour == null) throw new NullPointerException("Input neighbour is null");
+		for (int i=0; i<6; i++) {
+			if (neighbour.getIndex() ==this.neighbours.get(i)) {
+				Tools.Direction dir = Tools.Direction.opposite(Tools.Direction.fromInt(i));
+				this.inParticles.set(dir.getValue(), newParticle);
+				count++;
+				return;
+			}
+		}
+		throw new RuntimeException("Input neighbour is not a neighbour of this cell."); 
+	}
+
+	/**
+	 * Returns the neighbour that is in the input direction from this cell or null if there is none
+	 */
+	public HCell getNeighbour( Tools.Direction direction, HexGrid hexGrid ) { 
+
+		if (direction==null) throw new NullPointerException("Input direction is null");
+		int neig = this.neighbours.get(direction.getValue());
+		if (neig<0) {
+			return null;
+		}
+		return this.getHCell(neig, hexGrid); 
+	}
+
+	/**
+	 * The direction refers to the direction you need to go from "this" cell<br><br>
+	 * to reach the neighbour<br>
+	 * @param neighbour - may be null, may not exist for another direction<br>
+	 * @param direction - not null
+	 */
+	public void setNeighbour( int neighbourIndex, Tools.Direction direction ) { 
+
+		if (direction==null) throw new NullPointerException("Input direction is null");
+		if (neighbourIndex > 0 && this.neighbours.contains(neighbourIndex) && neighbourIndex!=(this.neighbours.get(direction.getValue()))) {
+			throw new RuntimeException("The input neighbour is already set in this HexCell for a different direction.");
+		}
+		this.neighbours.set(direction.getValue(), neighbourIndex);
+
+	}
+
+	/**
+	 * After movement<br>
+	 * Takes in-particles and performs collisions on them
+	 */
+	private void performCollision(  ) { 
+
+		if (this.count==0) return;
+		int count = this.count;//this.getInCount();
+		if (count <0 || count > 6) throw new RuntimeException("Invalid count "+count);
+
+		for (int i=0; i<6; i++) {
+			this.outParticles.set(i, this.inParticles.get(i));
+			this.inParticles.set(i, null);
+		}
+
+		if (count==0) return; // no collision
+		else if (count==1) {
+			//System.out.println("Count 1; no collision");
+			return; // no collision
+		} else if (count==2) { // possible collision(s)
+			//System.out.println("inParticles:"+this.inParticles.toString());
+			if (outParticles.get(Tools.Direction.E.getValue()) != null && outParticles.get(Tools.Direction.W.getValue()) != null) {
+				//collision 50% chance
+				if (Tools.random.nextBoolean()) {
+					//System.out.println("Count 2; E-W rotateClockwise");
+					this.rotateClockwise();
+				} else {
+					//System.out.println("Count 2; E-W rotateCounterClockwise");
+					this.rotateCounterClockwise();
+				}
+				return;
+			} else if (outParticles.get(Tools.Direction.NE.getValue()) !=null && outParticles.get(Tools.Direction.SW.getValue())!=null) {
+				//collision 50% chance
+				if (Tools.random.nextBoolean()) {
+					//System.out.println("Count 2; NE-SW rotateClockwise");
+					this.rotateClockwise();
+				} else {
+					//System.out.println("Count 2; NE-SW rotateCounterClockwise");
+					this.rotateCounterClockwise();
+				}
+				return;
+			} else if (outParticles.get(Tools.Direction.NW.getValue()) !=null && outParticles.get(Tools.Direction.SE.getValue())!=null) {
+				//collision 50% chance
+				if (Tools.random.nextBoolean()) {
+					//System.out.println("Count 2; NW-SE rotateClockwise");
+					this.rotateClockwise();
+				} else {
+					//System.out.println("Count 2; NW-SE rotateCounterClockwise");
+					this.rotateCounterClockwise();
+				}
+				return;
+			} else {
+				//System.out.println("Count 2; no collision");
+				// no collision
+
+			}
+		} else if (count > 2) { // certain collision
+			//System.out.println("Count 3; rotateClockwise");
+			this.rotateClockwise();
+		}
+		//System.out.println(this.outParticles.toString()); 
+	}
+
+	void updateRepresentation(HexGrid hexGrid) { 
+
+		/*if (this.outParticles.get(Tools.Direction.E.getValue()) != null) {
+		this.R_E.setVisible(true);
+	} else {
+		this.R_E.setVisible(false);
+	}
+
+	if (this.outParticles.get(Tools.Direction.NE.getValue()) != null) {
+		this.R_NE.setVisible(true);
+	} else {
+		this.R_NE.setVisible(false);
+	}
+
+	if (this.outParticles.get(Tools.Direction.NW.getValue()) != null) {
+		this.R_NW.setVisible(true);
+	} else {
+		this.R_NW.setVisible(false);
+	}
+
+	if (this.outParticles.get(Tools.Direction.W.getValue()) != null) {
+		this.R_W.setVisible(true);
+	} else {
+		this.R_W.setVisible(false);
+	}
+
+	if (this.outParticles.get(Tools.Direction.SW.getValue()) != null) {
+		this.R_SW.setVisible(true);
+	} else {
+		this.R_SW.setVisible(false);
+	}
+
+	if (this.outParticles.get(Tools.Direction.SE.getValue()) != null) {
+		this.R_SE.setVisible(true);
+	} else {
+		this.R_SE.setVisible(false);
+	}*/
+		Color col = null;
+		if (this.outParticles.get(Tools.Direction.E.getValue())!=null) {
+			this.R_E = hexGrid.particles.get(this.outParticles.get(Tools.Direction.E.getValue())).getState();
+		} else {
+			this.R_E = null;
+		}
+		if (this.outParticles.get(Tools.Direction.NE.getValue())!=null) {
+			this.R_NE = hexGrid.particles.get(this.outParticles.get(Tools.Direction.NE.getValue())).getState();
+		} else {
+			this.R_NE = null;
+		}
+		if (this.outParticles.get(Tools.Direction.NW.getValue())!=null) {
+			this.R_NW = hexGrid.particles.get(this.outParticles.get(Tools.Direction.NW.getValue())).getState();
+		} else {
+			this.R_NW = null;
+		}
+		if (this.outParticles.get(Tools.Direction.W.getValue())!=null) {
+
+			this.R_W = hexGrid.particles.get(this.outParticles.get(Tools.Direction.W.getValue())).getState();
+		} else {
+			this.R_W = null;
+		}
+		if (this.outParticles.get(Tools.Direction.SW.getValue())!=null) {
+			this.R_SW = hexGrid.particles.get(this.outParticles.get(Tools.Direction.SW.getValue())).getState();
+		} else {
+			this.R_SW = null;
+		}
+		if (this.outParticles.get(Tools.Direction.SE.getValue())!=null) {
+			this.R_SE = hexGrid.particles.get(this.outParticles.get(Tools.Direction.SE.getValue())).getState();
+		} else {
+			this.R_SE = null;
+		}
+		//for (int i=0; i<6; i++) {
+		//Point p = this.getParticlePosition(Tools.Direction.fromInt(i));
+		//if (this.outParticles.get(i) != null) {
+		//Particle pa = hexGrid.particles.get(this.outParticles.get(i));
+		//pa.setXY(this.getX()+p.x, this.getY()+p.y);
+		//} else {
+		//}
+		//} 
+	}
+
+	void setParticle( Tools.Direction direction, Integer particle ) { 
+
+		this.outParticles.set(direction.getValue(), particle);
+		this.count++; 
+	}
+
+
+	Point 
+	getParticlePosition( Tools.Direction direction ) { 
+
+		if (direction==null) throw new NullPointerException("Input direction is null");
+		Point p = new Point();
+		switch(direction) {
+		case W:  p.x=29;p.y=15;return p;
+		case SW: p.x=21;p.y=4; return p;
+		case SE: p.x=8; p.y=4; return p;
+		case E:  p.x=0; p.y=15;return p;
+		case NE: p.x=8; p.y=25;return p;
+		case NW: p.x=21;p.y=25;return p;
+		}
+		return null; 
+	}
+
+	void performInfections(HexGrid hexGrid) { 
+
+		if (this.count==0) return;
+		ArrayList<Integer> existing = new ArrayList<Integer>();
+		for (Integer p: this.outParticles) {
+			if (p!=null) {
+				existing.add(p);
+			}
+		}
+		//System.out.println("performInfections() "+existing);
+		for (Integer p1 : existing) {
+			for (Integer p2 : existing) {
+				if (p1 != p2) {
+					if (hexGrid.particles.get(p1).isInfected()) {
+						if (hexGrid.particles.get(p2).isSusceptible() && hexGrid.particles.get(p1).willInfect(hexGrid.infectionProbability)) {
+							hexGrid.particles.get(p2).infect();
+							hexGrid.numInfected++;
+							hexGrid.numSusceptible--;
+							if (hexGrid.debugOutput) {
+								System.out.println(hexGrid.particles.get(p1).toString()+"["+this.toString()+"] infects "+hexGrid.particles.get(p2).toString()+"["+this.toString()+"]");
+							}
+						}
+					}
+				}
+
+			}
+		} 
+	}
+
+	/**
+	 * Sets all in- and outparticles null
+	 */
+	public void clearParticles(  ) { 
+
+		for (int i=0; i<6; i++) {
+			this.inParticles.set(i, null);
+			this.outParticles.set(i, null);
+		}
+		this.count = 0; 
+	}
+
+	void performRecoveries(HexGrid hexGrid) { 
+
+		if (this.count==0) return;
+		ArrayList<Integer> existing = new ArrayList<Integer>();
+		for (Integer p: this.outParticles) {
+			if (p!=null) {
+				existing.add(p);
+			}
+		}
+		//System.out.println("performInfections() "+existing);
+		for (Integer p1 : existing) {
+			if (hexGrid.particles.get(p1).isInfected() && hexGrid.particles.get(p1).tryToRecover(hexGrid.recoveryProbabilibty, hexGrid.debugOutput)) {
+				hexGrid.numInfected--;
+				hexGrid.numRecovered++;
+			}
+
+		} 
+	}
+
+	public Tools.Status R_SW;
+	public Tools.Status R_NW;
+	public Tools.Status R_E;
+	public Tools.Status R_W;
+	public Tools.Status R_SE;
+	public Tools.Status R_NE;
+
+	public void onStep(HexGrid hexGrid) {
+
+		this.performCollision();
+		this.performInfections(hexGrid);
+		this.performRecoveries(hexGrid);
+		this.updateRepresentation(hexGrid); 
+	}
+
+	public void onBeforeStep(HexGrid hexGrid) {
+
+		this.performMovement(hexGrid); 
+	}
+
+
+	public void onStartup() {
+
+		this.inParticles.add(null);
+		this.inParticles.add(null);
+		this.inParticles.add(null);
+		this.inParticles.add(null);
+		this.inParticles.add(null);
+		this.inParticles.add(null);
+
+		this.outParticles.add(null);
+		this.outParticles.add(null);
+		this.outParticles.add(null);
+		this.outParticles.add(null);
+		this.outParticles.add(null);
+		this.outParticles.add(null);
+
+		this.neighbours.add(-1);
+		this.neighbours.add(-1);
+		this.neighbours.add(-1);
+		this.neighbours.add(-1);
+		this.neighbours.add(-1);
+		this.neighbours.add(-1);
+		
+		this.R_E = null;
+		this.R_SE = null;
+		this.R_SW = null;
+		this.R_W = null;
+		this.R_NW = null;
+		
+		/*this.R_NE.setVisible(true);
+		this.R_E.setVisible(true);
+		this.R_SE.setVisible(true);
+		this.R_SW.setVisible(true);
+		this.R_W.setVisible(true);
+		this.R_NW.setVisible(true);
+
+		this.R_NE.setFillColor(Color.WHITE);
+		this.R_E.setFillColor(Color.WHITE);
+		this.R_SE.setFillColor(Color.WHITE);
+		this.R_SW.setFillColor(Color.WHITE);
+		this.R_W.setFillColor(Color.WHITE);
+		this.R_NW.setFillColor(Color.WHITE);*/
+
+		this.count=0; 
+	}
+}
+
+]]></Text>
 		</JavaClass>
 	</JavaClasses>
 </Model>
