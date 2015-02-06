@@ -4,15 +4,14 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="7.0.3.201406021408" AlpVersion="7.0.2">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="7.1.2.201412051435" AlpVersion="7.1.10">
 <Model>
 	<Id>1202856376109</Id>
 	<Name><![CDATA[LGCA_c17]]></Name>
-	<Description><![CDATA[An implementation of a LGCA model as requested in the Modelling and Simulation Assignment C17.]]></Description> 
+	<Description><![CDATA[An implementation of a LGCA model as requested in the Modelling and Simulation Assignment C17.]]></Description>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[lgcac17]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Day]]></ModelTimeUnit>
-	<SystemOfMeasurement><![CDATA[METRIC]]></SystemOfMeasurement>
 	<ActiveObjectClasses>
 		<!--   =========   Active Object Class   ========  -->
 		<ActiveObjectClass>
@@ -21,20 +20,27 @@
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
-			<StartupCode><![CDATA[if (this.debugOutput)System.out.println("HexGrid onStartup start");
+			<StartupCode><![CDATA[this.gridHelper = new Tools.GridHelper(this.numRows, this.numColumns);
+System.out.println("HexGrid onStartup start");
 this.initHCells();
-if (this.debugOutput)System.out.println("HexGrid onStartup initHCells done");
+System.out.println("HexGrid onStartup initHCells done");
 createHexGrid();
-if (this.debugOutput)System.out.println("HexGrid onStartup createHexGrid done");
+System.out.println("HexGrid onStartup createHexGrid done");
 initParticles();
-if (this.debugOutput)System.out.println("HexGrid onStartup initParticles done");
+System.out.println("HexGrid onStartup initParticles done");
 populateHCells();
-if (this.debugOutput)System.out.println("HexGrid onStartup populateHCells done");
+System.out.println("HexGrid onStartup populateHCells done");
 //populateHCellsCustom();
-if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCode>
+System.out.println("HexGrid onStartup end");]]></StartupCode>
 			<Generic>false</Generic>
-			<GenericParameters><![CDATA[T]]></GenericParameters>
-			<GenericParametersLabel><![CDATA[Generic parameters:]]></GenericParametersLabel>
+			<GenericParameter>
+				<Id>1423154455816</Id>
+				<Name><![CDATA[1423154455816]]></Name>
+				<GenericParameterValue Class="CodeValue">
+					<Code><![CDATA[T]]></Code>
+				</GenericParameterValue>
+				<GenericParameterLabel><![CDATA[Generic parameters:]]></GenericParameterLabel>
+			</GenericParameter>
 			<FlowChartsUsage>ENTITY</FlowChartsUsage>
 			<SamplesToKeep>100</SamplesToKeep>
 			<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
@@ -47,13 +53,18 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 				<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
-				<VelocityCode><![CDATA[10]]></VelocityCode>
+				<VelocityCode Class="CodeUnitValue">
+					<Code><![CDATA[10 / getScale().pixelsPerUnit(METER) / 86400]]></Code>
+					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+				</VelocityCode>
 				<AfterStepCode><![CDATA[//System.out.println("Step");]]></AfterStepCode>
-				<VelocityGISCode><![CDATA[10]]></VelocityGISCode>
 			</AgentProperties>
 			<EnvironmentProperties>
 					<EnableSteps>true</EnableSteps>
-					<StepDurationCode><![CDATA[1.0]]></StepDurationCode>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code><![CDATA[1.0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</StepDurationCode>
 					<SpaceType>CONTINUOUS</SpaceType>
 					<WidthCode><![CDATA[500]]></WidthCode>
 					<HeightCode><![CDATA[500]]></HeightCode>
@@ -72,8 +83,34 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 			</EnvironmentProperties>
 			<DatasetsCreationProperties>
 				<AutoCreate>true</AutoCreate>
-				<RecurrenceCode><![CDATA[1]]></RecurrenceCode>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1423209600000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</RecurrenceCode>
 			</DatasetsCreationProperties>
+			<ScaleRuler>
+				<Id>1423154455856</Id>
+				<Name><![CDATA[scale]]></Name>
+				<X>0</X><Y>-150</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>false</PresentationFlag>
+				<ShowLabel>false</ShowLabel>
+				<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+				<Length>100</Length>
+				<Rotation>0</Rotation>
+				<ScaleType>BASED_ON_LENGTH</ScaleType>
+				<ModelLength>10</ModelLength>
+				<LengthUnits>METER</LengthUnits>
+				<Scale>10</Scale>
+				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+			</ScaleRuler>
 			<ConnectionsId>1422734692360</ConnectionsId>
 			<Variables>
 				<Variable Class="PlainVariable">
@@ -115,6 +152,31 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 						<InitialValue><![CDATA[0]]></InitialValue>                 	
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1423175352945</Id>
+					<Name><![CDATA[gridHelper]]></Name>
+					<X>30</X><Y>100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[Tools.GridHelper]]></Type>        
+						<InitialValue><![CDATA[null]]></InitialValue>                 	
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1423182194202</Id>
+					<Name><![CDATA[popIndex]]></Name>
+					<X>90</X><Y>50</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int[]]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1422734934983</Id>
 					<Name><![CDATA[numRows]]></Name>
@@ -125,11 +187,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[1]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422734934981</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>SLIDER</EditorContolType>
 							<MinSliderValue><![CDATA[1]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -147,11 +212,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[1]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422734907108</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>SLIDER</EditorContolType>
 							<MinSliderValue><![CDATA[1]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -169,11 +237,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[0]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422749587992</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>SLIDER</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[500]]></MaxSliderValue>
@@ -191,11 +262,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[float]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[0]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422786080213</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -213,11 +287,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[float]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[0]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422786136302</Id>
-							<Name><![CDATA[]]></Name>
 							<Label><![CDATA[recoveryProbability]]></Label>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
@@ -236,11 +313,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[0]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422788704771</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -258,11 +338,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[0]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422788724093</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -280,11 +363,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[0]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422788743146</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -302,11 +388,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[false]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422892762998</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>CHECK_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -324,11 +413,14 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[true]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[true]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1422894042259</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>CHECK_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -346,32 +438,20 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
 						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
 						<SdArray>false</SdArray>
-						<DefaultValue><![CDATA[true]]></DefaultValue>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[true]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1423065907509</Id>
-							<Name><![CDATA[]]></Name>
 							<EditorContolType>CHECK_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
 						</ParameterEditor>
 					</Properties>                 
-				</Variable>
-				<Variable Class="CollectionVariable">
-					<Id>1422738092533</Id>
-					<Name><![CDATA[map]]></Name>
-					<X>10</X><Y>90</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" AccessType="private" StaticVariable="false">
-						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[java.util.ArrayList<Integer>]]></ElementClass>
-						<ValueElementClass><![CDATA[String]]></ValueElementClass>
-					</Properties>
-
 				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1423011870046</Id>
@@ -394,7 +474,7 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 					<X>260</X><Y>-20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
+					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
 						<CollectionClass><![CDATA[java.util.ArrayList]]></CollectionClass>
@@ -434,90 +514,20 @@ if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCod
 if (numRows<=0) throw new RuntimeException("numRows has to be larger than 0, but was "+numRows);
 if (numColumns<=0) throw new RuntimeException("numColumns has to be larger than 0, but was "+numColumns);
 if (this.hCells.size() != (int)(this.numRows*this.numColumns)) throw new RuntimeException("hCells should have "+(numRows*numColumns)+" elements but only has "+this.hCells.size());
-int cellCounter = 0;
+
+this.popIndex = new int[this.hCells.size()*6];
+/*int cellCounter = -1;
 boolean topIsLeft=true;
 for (int r=0; r<numRows; r++) {
-	topIsLeft = !topIsLeft;
-	ArrayList<Integer> row = new ArrayList<Integer>();
 	for (int c=0; c<numColumns; c++) {
-		HCell hc = this.hCells.get(cellCounter);
-		int hcInd=cellCounter;
 		cellCounter++;
-		if (c>0) { // set horizontal neighbours
-			HCell prev = this.hCells.get(row.get(c-1));
-			prev.setNeighbour(hc.getIndex(), Tools.Direction.E);
-			hc.setNeighbour(prev.getIndex(), Tools.Direction.W);
+		for (Tools.Direction direction : Tools.Direction.values()) {
+			this.hCells.get(cellCounter).setNeighbour(this.gridHelper.getNeighbour(cellCounter, direction), direction);
 		}
-		if (r>0) { // set NE and NW neighbours
-			int previousRow = r-1;
-			if (c>0) {
-				if (c<(numColumns-1)) {
-					HCell nw = null;
-					HCell ne = null;
-					if (topIsLeft) {
-						nw = this.hCells.get(this.map.get(previousRow).get(c));
-						ne = this.hCells.get(this.map.get(previousRow).get(c+1));
-					} else { //if (topIsLeft) {
-						nw = this.hCells.get(this.map.get(previousRow).get(c-1));
-						ne = this.hCells.get(this.map.get(previousRow).get(c));
-					}
-					hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
-					nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
-					
-					hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
-					ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
-					
-				} else { //if (c<(numColumns-1)) {
-					//border right
-					if (topIsLeft) {
-						HCell nw = null;
-						nw = this.hCells.get(this.map.get(previousRow).get(c));
-						
-						hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
-						nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
-					} else { //if (topIsLeft) {
-						HCell nw = null;
-						HCell ne = null;
-						
-						nw = this.hCells.get(this.map.get(previousRow).get(c-1));
-						ne = this.hCells.get(this.map.get(previousRow).get(c));
-						
-						hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
-						nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
-						
-						hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
-						ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
-					}
-				}
-			} else { // if (c>0) {
-				// border left
-				if (topIsLeft) {
-					HCell nw = null;
-					HCell ne = null;
-					
-					nw = this.hCells.get(this.map.get(previousRow).get(c));
-					ne = this.hCells.get(this.map.get(previousRow).get(c+1));
-					
-					hc.setNeighbour(nw.getIndex(), Tools.Direction.NW);
-					nw.setNeighbour(hc.getIndex(), Tools.Direction.SE);
-					
-					hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
-					ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
-				} else {
-					HCell ne = null;
-					
-					ne = this.hCells.get(this.map.get(previousRow).get(c));
-
-					hc.setNeighbour(ne.getIndex(), Tools.Direction.NE);
-					ne.setNeighbour(hc.getIndex(), Tools.Direction.SW);
-				}
-			} // if (c>0) {
-		} //if (r>0) {
-		row.add(hcInd);
 	} // for (int c=0; c<y; c++) {
-	this.map.add(row);
+	//this.map.add(row);
 } // for (int r=0; r<x; r++) {
-
+*/
 // Set positions:
 if (numColumns > 1) {
 	this.rectangle.setHeight(numRows*HCell.height-(numRows*HCell.verticalOffset)+HCell.verticalOffset);
@@ -531,23 +541,24 @@ if (numRows > 1) {
 	this.rectangle.setWidth(numColumns*HCell.width);
 }
 
-topIsLeft = true;
+boolean topIsLeft = true;
+int cellCounter=-1; 
 for (int r=0; r<numRows; r++) {
 	topIsLeft=!topIsLeft;
 	for (int c=0; c<numColumns; c++) {
-		HCell current = this.hCells.get(this.map.get(r).get(c));
+		cellCounter++;
+		HCell current = this.hCells.get(cellCounter);
 		double offsetX = 0;
 		if (topIsLeft) offsetX = HCell.horizontalOffset;
 		double offsetY = -HCell.verticalOffset*r;
 		current.setXY(this.rectangle.getX()+(c*HCell.width)+offsetX,
 								this.rectangle.getY()+(r*HCell.height)+offsetY);
-
+		
 	}
 }
 
 this.datagraph.setX(this.rectangle.getX()+340);
-this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
-]]></Body>
+this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -559,30 +570,44 @@ this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[ArrayList<int[]> index = new ArrayList<int[]>();
-
-this.clearAllParticles();
-if (this.debugOutput)System.out.println("populateHCells clearAllParticles done");
-
+					<Body><![CDATA[this.clearAllParticles();
+//int[][] index = new int[this.hCells.size()*6][2];
+System.out.println("populateHCells clearAllParticles done");
+int cellCounter=-1;
+final int mult =100000000;
 for (int i=0; i<(this.hCells.size()); i++) {
 	for (int d=0; d<6; d++) {
-		index.add(new int[]{i,d});
+		cellCounter++;
+		if (i>=100000000) throw new RuntimeException("too large");
+		this.popIndex[cellCounter]=(d*mult)+i;
 	}
 	
 }
+System.out.println("populateHCells index filled");
 //index = Tools.shuffleArrayList(index);
-Collections.shuffle(index);
-if (this.debugOutput)System.out.println("populateHCells index shuffled");
+//Collections.shuffle(index);
+this.shufflePopIndex();
+System.out.println("populateHCells index shuffled");
+
+int cellNum = -2;
+int dirNum = -2;
 // will contain Particle initialization
 for (int i=0; i<particles.size(); i++) {
-	if (this.debugOutput && i%1000==0) System.out.println(i);
-	int[] n = index.remove(0);
-	int cellNum = n[0];
-	int dirNum = n[1];
+	if (i%1000==0) System.out.println(i);
+	for (int j=0; j<=6; j++) {
+	if (j==6) throw new RuntimeException("wrong decomposition "+this.popIndex[i]+" "+i);
+		 
+		 if (this.popIndex[i] < mult) {
+		 	cellNum=this.popIndex[i];
+		 	dirNum=j;
+		 	break;
+		 }
+		 this.popIndex[i]-=mult;
+	}
 	//System.out.println("hCellSize:"+this.hCells.size()+" particlesSize:"+this.particles.size()+" pop: cellNum:"+cellNum+" dirNum:"+dirNum);
 	hCells.get(cellNum).setParticle(Tools.Direction.fromInt(dirNum), i);
 }
-if (this.debugOutput)System.out.println("populateHCells afterParticleSet");]]></Body>
+System.out.println("populateHCells afterParticleSet");]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -605,7 +630,7 @@ if (this.debugOutput)System.out.println("populateHCells afterParticleSet");]]></
 					<X>120</X><Y>-10</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
+					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[ArrayList<Tools.Status> index = new ArrayList<Tools.Status>();
 if (this.initialInfected+this.initialRecovered+this.initialSusceptible != this.numParticles) {
@@ -621,7 +646,7 @@ for (int i=0; i<this.initialRecovered; i++) {
 	index.add(Tools.Status.RECOVERED);
 }
 
-index = Tools.shuffleArrayList(index);
+Collections.shuffle(index);
 
 for (int i=0; i<index.size(); i++) {
 	Tools.Status s = index.get(i);
@@ -649,7 +674,7 @@ for (int i=0; i<index.size(); i++) {
 					<X>130</X><Y>-30</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
+					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[for (HCell c : this.hCells) {
 	c.clearParticles();
@@ -673,6 +698,26 @@ for (int i=0; i<num; i++) {
 	HCell c = new HCell(i);
 	this.hCells.add(c);
 }]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1423182968678</Id>
+					<Name><![CDATA[shufflePopIndex]]></Name>
+					<X>180</X><Y>100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[int a;
+int index;
+for (int i = this.popIndex.length - 1; i > 0; i--){
+	index = Tools.random.nextInt(i + 1);
+	a = this.popIndex[index];
+	this.popIndex[index] = this.popIndex[i];
+	this.popIndex[i] = a;
+}
+]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -701,7 +746,7 @@ for (int i=0; i<num; i++) {
 				<EmbeddedObject>
 					<Id>0</Id>
 					<Name><![CDATA[clock]]></Name>
-					<Description><![CDATA[Just a helper Agent because HexGrid does not perform step/beforeStep methods]]></Description> 
+					<Description><![CDATA[Just a helper Agent because HexGrid does not perform step/beforeStep methods]]></Description>
 					<X>180</X><Y>-50</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -711,7 +756,13 @@ for (int i=0; i<num; i++) {
 						<PackageName><![CDATA[lgcac17]]></PackageName>
 						<ClassName><![CDATA[Clock]]></ClassName>
 					</ActiveObjectClass>
-					<GenericParametersSubstitute><![CDATA[]]></GenericParametersSubstitute>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[lgcac17]]></PackageName>
+							<ClassName><![CDATA[Clock]]></ClassName>
+							<ItemName><![CDATA[1423154455857]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
 					<Parameters>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -955,7 +1006,16 @@ for (int i=0; i<num; i++) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<AutoUpdate>true</AutoUpdate>
-					<RecurrenceCode><![CDATA[1]]></RecurrenceCode>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1423209600000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Width>520</Width>
 					<Height>210</Height>
@@ -996,7 +1056,7 @@ for (int i=0; i<num; i++) {
 					<Expression2><![CDATA[numSusceptible]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>
 						<PointStyle>NONE</PointStyle>
-						<LineWidth>2</LineWidth>
+						<LineWidth>2.0</LineWidth>
 					</DatasetExpression>
 					<DatasetExpression>  
 						<Title><![CDATA[numInfected]]></Title>
@@ -1005,7 +1065,7 @@ for (int i=0; i<num; i++) {
 					<Expression2><![CDATA[numInfected]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>
 						<PointStyle>NONE</PointStyle>
-						<LineWidth>2</LineWidth>
+						<LineWidth>2.0</LineWidth>
 					</DatasetExpression>
 					<DatasetExpression>  
 						<Title><![CDATA[numRecovered]]></Title>
@@ -1014,7 +1074,7 @@ for (int i=0; i<num; i++) {
 					<Expression2><![CDATA[numRecovered]]></Expression2>
 					<Expression2Flag>true</Expression2Flag>
 						<PointStyle>NONE</PointStyle>
-						<LineWidth>2</LineWidth>
+						<LineWidth>2.0</LineWidth>
 					</DatasetExpression>
 					<SamplesToKeep>1000</SamplesToKeep>
 					<TimeWindowExpression><![CDATA[100]]></TimeWindowExpression>
@@ -1035,8 +1095,14 @@ for (int i=0; i<num; i++) {
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
 			<Generic>false</Generic>
-			<GenericParameters><![CDATA[T]]></GenericParameters>
-			<GenericParametersLabel><![CDATA[Generic parameters:]]></GenericParametersLabel>
+			<GenericParameter>
+				<Id>1423154455857</Id>
+				<Name><![CDATA[1423154455857]]></Name>
+				<GenericParameterValue Class="CodeValue">
+					<Code><![CDATA[T]]></Code>
+				</GenericParameterValue>
+				<GenericParameterLabel><![CDATA[Generic parameters:]]></GenericParameterLabel>
+			</GenericParameter>
 			<FlowChartsUsage>ENTITY</FlowChartsUsage>
 			<SamplesToKeep>100</SamplesToKeep>
 			<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
@@ -1049,7 +1115,10 @@ for (int i=0; i<num; i++) {
 				<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
-				<VelocityCode><![CDATA[10]]></VelocityCode>
+				<VelocityCode Class="CodeUnitValue">
+					<Code><![CDATA[10 / getScale().pixelsPerUnit(METER) / 86400]]></Code>
+					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+				</VelocityCode>
 				<AfterStepCode><![CDATA[if (this.hexGrid.debugOutput)System.out.println("Clock onStep start");
 for (HCell c : this.hexGrid.hCells) {
 	c.onStep(this.hexGrid);
@@ -1072,11 +1141,13 @@ if (this.hexGrid.randomizeParticleLocationsBeforeEachStep) {
 	//(System.out.println("no random");
 }
 if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></BeforeStepCode>
-				<VelocityGISCode><![CDATA[10]]></VelocityGISCode>
 			</AgentProperties>
 			<EnvironmentProperties>
 					<EnableSteps>false</EnableSteps>
-					<StepDurationCode><![CDATA[1.0]]></StepDurationCode>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code><![CDATA[1.0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</StepDurationCode>
 					<SpaceType>CONTINUOUS</SpaceType>
 					<WidthCode><![CDATA[500]]></WidthCode>
 					<HeightCode><![CDATA[500]]></HeightCode>
@@ -1095,8 +1166,34 @@ if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></B
 			</EnvironmentProperties>
 			<DatasetsCreationProperties>
 				<AutoCreate>true</AutoCreate>
-				<RecurrenceCode><![CDATA[1]]></RecurrenceCode>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1423209600000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+					</RecurrenceCode>
 			</DatasetsCreationProperties>
+			<ScaleRuler>
+				<Id>1423154455858</Id>
+				<Name><![CDATA[scale]]></Name>
+				<X>0</X><Y>-150</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>false</PresentationFlag>
+				<ShowLabel>false</ShowLabel>
+				<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+				<Length>100</Length>
+				<Rotation>0</Rotation>
+				<ScaleType>BASED_ON_LENGTH</ScaleType>
+				<ModelLength>10</ModelLength>
+				<LengthUnits>METER</LengthUnits>
+				<Scale>10</Scale>
+				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+			</ScaleRuler>
 			<ConnectionsId>1422893095819</ConnectionsId>
 			<AgentLinks>
 				<AgentLink>
@@ -1143,7 +1240,7 @@ if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></B
 	<MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod>
 	<AlgebraicEquationsMethod>MODIFIED_NEWTON</AlgebraicEquationsMethod>
 	<AbsoluteAccuracy>1.0E-5</AbsoluteAccuracy>
-	<FixedTimeStep>0.0010</FixedTimeStep>
+	<FixedTimeStep>0.001</FixedTimeStep>
 	<RelativeAccuracy>1.0E-5</RelativeAccuracy>
 	<TimeAccuracy>1.0E-5</TimeAccuracy>	
 	<Experiments>	
@@ -1489,6 +1586,7 @@ if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></B
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[if ( getState() == IDLE )
 	run();
 getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
@@ -1515,6 +1613,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -1537,6 +1636,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -1559,6 +1659,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -1580,6 +1681,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				AsObject="true">
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
@@ -1603,6 +1705,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				AsObject="true">
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
@@ -1626,6 +1729,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				AsObject="true">
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
@@ -1649,6 +1753,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				AsObject="true">
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
@@ -1672,6 +1777,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				AsObject="true">
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
@@ -1696,6 +1802,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -1718,6 +1825,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -1740,6 +1848,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 						<EnableExpression><![CDATA[true]]></EnableExpression>
 						<ActionCode><![CDATA[this.n = Math.floor(Math.sqrt((5*(this.N - 1)+this.C)/6*this.C));
 this.numRows=(int)this.n;
@@ -1765,6 +1874,7 @@ this.numColumns=(int)this.n;]]></ActionCode>
                         <EmbeddedIcon>false</EmbeddedIcon>				
 						<FillColor/>
 						<TextColor/>
+						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[this.n = Math.floor(Math.sqrt((5*(this.N - 1)+this.C)/6*this.C));
 this.numRows=(int)this.n;]]></ActionCode>
 					</BasicProperties>
@@ -1780,47 +1890,66 @@ this.numRows=(int)this.n;]]></ActionCode>
 			<Parameters>			
 				<Parameter>
 					<ParameterName><![CDATA[numRows]]></ParameterName>
-					<ParameterValue><![CDATA[numRows]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[numRows]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[numColumns]]></ParameterName>
-					<ParameterValue><![CDATA[numColumns]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[numColumns]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[numParticles]]></ParameterName>
-					<ParameterValue><![CDATA[numParticles]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[numParticles]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[infectionProbability]]></ParameterName>
-					<ParameterValue><![CDATA[(float)(this.infectionProbability/100.0)]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[(float)(this.infectionProbability/100.0)]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[recoveryProbabilibty]]></ParameterName>
-					<ParameterValue><![CDATA[(float)(this.recoveryProbability/100.0)]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[(float)(this.recoveryProbability/100.0)]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[initialSusceptible]]></ParameterName>
-					<ParameterValue><![CDATA[this.initialSusceptible]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.initialSusceptible]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[initialRecovered]]></ParameterName>
-					<ParameterValue><![CDATA[this.initialRecovered]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.initialRecovered]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[initialInfected]]></ParameterName>
-					<ParameterValue><![CDATA[this.initialInfected]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.initialInfected]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[randomizeParticleLocationsBeforeEachStep]]></ParameterName>
-					<ParameterValue><![CDATA[this.randomizeParticleLocationsBeforeEachStep]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.randomizeParticleLocationsBeforeEachStep]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[debugOutput]]></ParameterName>
-					<ParameterValue><![CDATA[this.debugOutput]]></ParameterValue>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.debugOutput]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[displayParticles]]></ParameterName>
-					<ParameterValue><![CDATA[]]></ParameterValue>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties 
@@ -1867,117 +1996,374 @@ this.numRows=(int)this.n;]]></ActionCode>
 		<JavaClass>
 			<Id>1422736602831</Id>
 			<Name><![CDATA[Tools]]></Name>
-			<Description><![CDATA[A helper class]]></Description> 
-			<Text><![CDATA[/**
- * Tools
- */	
+			<Description><![CDATA[A helper class]]></Description>
+			<Text><![CDATA[import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Currency;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Random;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.Stack;
+import java.util.Timer;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Vector;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import com.anylogic.engine.connectivity.ResultSet;
+import com.anylogic.engine.connectivity.Statement;
+import com.anylogic.engine.elements.IElementDescriptor;
+import com.anylogic.engine.markup.Network;
+import com.anylogic.engine.Position;
+import com.anylogic.engine.markup.PedFlowStatistics;
+import com.anylogic.engine.markup.DensityMap;
+
+import static java.lang.Math.*;
+import static com.anylogic.engine.UtilitiesArray.*;
+import static com.anylogic.engine.UtilitiesCollection.*;
+import static com.anylogic.engine.presentation.UtilitiesColor.*;
+import static com.anylogic.engine.presentation.UtilitiesDrawing.*;
+import static com.anylogic.engine.HyperArray.*;
+
+import com.anylogic.engine.*;
+import com.anylogic.engine.analysis.*;
+import com.anylogic.engine.connectivity.*;
+import com.anylogic.engine.gis.*;
+import com.anylogic.engine.markup.*;
+import com.anylogic.engine.presentation.*;
+
+import static com.anylogic.engine.Utilities.*;
+
+
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Currency;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Random;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.Stack;
+import java.util.Timer;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Vector;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import com.anylogic.engine.connectivity.ResultSet;
+import com.anylogic.engine.connectivity.Statement;
+import com.anylogic.engine.elements.IElementDescriptor;
+import com.anylogic.engine.markup.Network;
+import com.anylogic.engine.Position;
+import com.anylogic.engine.markup.PedFlowStatistics;
+import com.anylogic.engine.markup.DensityMap;
+
+import static java.lang.Math.*;
+import static com.anylogic.engine.UtilitiesArray.*;
+import static com.anylogic.engine.UtilitiesCollection.*;
+import static com.anylogic.engine.presentation.UtilitiesColor.*;
+import static com.anylogic.engine.presentation.UtilitiesDrawing.*;
+import static com.anylogic.engine.HyperArray.*;
+
+import com.anylogic.engine.*;
+import com.anylogic.engine.analysis.*;
+import com.anylogic.engine.connectivity.*;
+import com.anylogic.engine.gis.*;
+import com.anylogic.engine.markup.*;
+import com.anylogic.engine.presentation.*;
+
+import static com.anylogic.engine.Utilities.*;
+
+/**
+* Tools
+*/	
 public class Tools implements Serializable {
-	public static Random random = new Random(12345);
+public static Random random = new Random(12345);
+
+/**
+* Default constructor
+*/
+public Tools() {
+}
+public static class GridHelper {
+int[] rowBeginnings;
+int[] rowEnds;
+int numRows;
+int numColumns;
+int lastElementRowBeginnings;
+//int lastElementRowEnds;
+public GridHelper(int numRows, int numColumns) {
+	// calculate rowbeginnings:
+	rowBeginnings = new int[numRows];
+	rowEnds = new int[numRows];
+	this.numColumns=numColumns;
+	this.numRows=numRows;
+	int rowBeg = -numColumns;
+	for (int i=0; i<numRows; i++) {
+		rowBeg+=numColumns;
+		this.rowBeginnings[i]=rowBeg;
+	}
+	int rowEnd=-1;
+	for (int i=0; i<numRows; i++) {
+		rowEnd+=numColumns;
+		this.rowEnds[i]=rowEnd;
+	}
+	this.lastElementRowBeginnings = this.rowBeginnings.length-1;
+	//this.lastElementRowEnds = this.rowEnds.length-1;
+}
+private boolean hasTopLeft(int index) {
+	if (index<0) throw new RuntimeException("index "+index+" <0");
+	boolean topLeft=true;
+	for (int i=0; i<rowEnds.length; i++) {
+		if (index<=rowEnds[i]) {
+			return !topLeft;
+		} else {
+			topLeft=!topLeft;
+		}
+	}
+	throw new RuntimeException("index "+index+" out of bounds");
+}
+private boolean isInTopRow(int index) {
+	return index < this.numRows;
+}
+private boolean isInBottomRow(int index) {
+	return index >= this.rowBeginnings[this.lastElementRowBeginnings];
+}
+private boolean isLeft(int index) {
+	for (int i=0; i<this.rowBeginnings.length; i++) {
+		if (index <= this.rowBeginnings[i]) {
+			if (index==this.rowBeginnings[i]) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+private boolean isRight(int index) {
+	if (index < this.rowEnds[0]) return false;
+	for (int i=0; i<this.rowEnds.length; i++) {
+		if (index >= this.rowEnds[i]) {
+			if (index==this.rowEnds[i]) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+// to mitigate GC issues? maybe
+private boolean top=false;
+private boolean bottom=false;
+private boolean left=false;
+private boolean right=false;
+private boolean topLeft=false;
+private int out=-2;
+
+public synchronized int getNeighbour(int currentIndex, Direction dir) {
+	top=this.isInTopRow(currentIndex);
+	bottom=this.isInBottomRow(currentIndex);
+	//String debugStr=" ci:"+currentIndex+" direction:"+dir+" t:"+top+" b:"+bottom;
 	
-    /**
-     * Default constructor
-     */
-    public Tools() {
-    }
-
-	@Override
-	public String toString() {
-		return super.toString();
+	// filter special cases
+	if (top) {
+		if (dir==Direction.NE) {//System.out.println("-1 NE top"+debugStr);
+		return -1;}
+		else if (dir==Direction.NW) {//System.out.println("-1 NW top"+debugStr);
+		return -1;}
+	} else if (bottom) {
+		if (dir==Direction.SE) {//System.out.println("-1 SE top"+debugStr);
+		return -1;}
+		else if (dir==Direction.SW) {//System.out.println("-1 SW top"+debugStr);
+		return -1;}
 	}
-
-	/**
-	 * This number is here for model snapshot storing purpose<br>
-	 * It needs to be changed when this class gets changed
-	 */ 
-	private static final long serialVersionUID = 1L;
-	/**
-	 * NE=North East<br>
-	 * SW=South West<br>
-	 * etc...
-	 * @author CLF
-	 *
-	 */
-	public static enum Direction {
-		E(0),NE(1),NW(2),W(3),SW(4),SE(5);
-		private int value;
-		Direction(int value) {
-			this.value = value;
+	left=this.isLeft(currentIndex);
+	right=this.isRight(currentIndex);
+	topLeft=this.hasTopLeft(currentIndex);
+	//debugStr = " ci:"+currentIndex+" direction:"+dir+" t:"+top+" r:"+right+" b:"+bottom+" l:"+left+" topLeft:"+topLeft;
+	if (left) {
+		if (dir==Direction.W) {//System.out.println("-1 W left"+debugStr);
+		return -1;}
+		if (!topLeft) {
+			if (dir==Direction.NW) {//System.out.println("-1 NW left nTl"+debugStr);
+			return -1;}
+			else if (dir==Direction.SW) {//System.out.println("-1 SW left nTl"+debugStr);
+			return -1;}
 		}
-		int getValue() {
-			return value;
-		}
-		public static Direction opposite(Direction dir) {
-			switch(dir) {
-			case E: return Direction.W;
-			case NE: return Direction.SW;
-			case NW: return Direction.SE;
-			case W: return Direction.E;
-			case SW: return Direction.NE;
-			case SE: return Direction.NW;
-			}
-			return null;
-		}
-		public static Direction fromInt(int i) {
-			if (i<0 || i>5) throw new RuntimeException("Invalid input integer. Must be between 0 and 5, but was "+i);
-			switch(i) {
-			case 0:
-				return E;
-			case 1:
-				return NE;
-			case 2:
-				return NW;
-			case 3:
-				return W;
-			case 4:
-				return SW;
-			case 5:
-				return SE;
-			}
-			return null;
-		}
-		public static Direction random() {
-			int x = Tools.random.nextInt(6);
-			return Direction.fromInt(x);
-		}
-	}
-	public static class Point {
-		public double x=0;
-		public double y=0;
-		public Point() {
-			
-		}
-		public Point(double x, double y) {
-			this.x=x;
-			this.y=y;
+	} else if (right) {
+		if (dir==Direction.E) {//System.out.println("-1 NW right"+debugStr);
+		return -1;}
+		if (topLeft) {
+			if (dir==Direction.NE) {//System.out.println("-1 NE right tl"+debugStr);
+			return -1;}
+			else if (dir==Direction.SE) {//System.out.println("-1 SE right tl"+debugStr);
+			return -1;}
 		}
 	}
 
-	public static enum Status {
-		SUSCEPTIBLE,
-		INFECTED,
-		RECOVERED;
-		public static Color getColor(Status state) {
-			if (state==null) return Color.ORANGE;
-			switch(state) {
-			case INFECTED: return Color.RED;
-			case RECOVERED: return Color.GREEN;
-			case SUSCEPTIBLE: return Color.GRAY;
-			default: return Color.ORANGE;
-			}
+	out=-2;
+	if (topLeft) {
+		switch(dir) {
+		case E : out= currentIndex+1;break;
+		case NE: out= currentIndex-this.numColumns+1;break;
+		case NW: out= currentIndex-this.numColumns;break;
+		case W : out= currentIndex-1;break;
+		case SW: out= currentIndex+numColumns;break;
+		case SE: out= currentIndex+numColumns+1;break;
+		}
+	} else {
+		switch(dir) {
+		case E : out= currentIndex+1;break;
+		case NE: out= currentIndex-this.numColumns;break;
+		case NW: out= currentIndex-this.numColumns-1;break;
+		case W : out= currentIndex-1;break;
+		case SW: out= currentIndex+numColumns-1;break;
+		case SE: out= currentIndex+numColumns;break;
 		}
 	}
-	public static <T> ArrayList<T> shuffleArrayList(ArrayList<T> list) {
-		ArrayList<T> in = list;
-		ArrayList<T> out = new ArrayList<T>();
-		int s = list.size();
-		
-		for (int i=0; i<s; i++) {
-			T temp = in.remove(Tools.random.nextInt(in.size()));
-			out.add(temp);
-		}
-		return out;
+	
+	//System.out.println("getNB: out:"+out+" "+debugStr);
+	if (out==-2) throw new RuntimeException("What happened, did not find neighbour: "
+			+currentIndex+" "+dir+"; left:"+left+" right:"+right+" top:"+top+" bottom:"+bottom+" topLeft:"+topLeft);
+	return out;
+}
+}
+@Override
+public String toString() {
+return super.toString();
+}
+
+/**
+* This number is here for model snapshot storing purpose<br>
+* It needs to be changed when this class gets changed
+*/ 
+private static final long serialVersionUID = 1L;
+/**
+* NE=North East<br>
+* SW=South West<br>
+* etc...
+* @author CLF
+*
+*/
+public static enum Direction {
+E(0),NE(1),NW(2),W(3),SW(4),SE(5);
+private int value;
+Direction(int value) {
+	this.value = value;
+}
+int getValue() {
+	return value;
+}
+public static Direction opposite(Direction dir) {
+	switch(dir) {
+	case E: return Direction.W;
+	case NE: return Direction.SW;
+	case NW: return Direction.SE;
+	case W: return Direction.E;
+	case SW: return Direction.NE;
+	case SE: return Direction.NW;
 	}
-}]]></Text>
+	return null;
+}
+public static Direction fromInt(int i) {
+	if (i<0 || i>5) throw new RuntimeException("Invalid input integer. Must be between 0 and 5, but was "+i);
+	switch(i) {
+	case 0:
+		return E;
+	case 1:
+		return NE;
+	case 2:
+		return NW;
+	case 3:
+		return W;
+	case 4:
+		return SW;
+	case 5:
+		return SE;
+	}
+	return null;
+}
+public static Direction random() {
+	int x = Tools.random.nextInt(6);
+	return Direction.fromInt(x);
+}
+}
+public static class Point {
+public double x=0;
+public double y=0;
+public Point() {
+	
+}
+public Point(double x, double y) {
+	this.x=x;
+	this.y=y;
+}
+}
+
+public static enum Status {
+SUSCEPTIBLE,
+INFECTED,
+RECOVERED;
+public static Color getColor(Status state) {
+	if (state==null) return Color.ORANGE;
+	switch(state) {
+	case INFECTED: return Color.RED;
+	case RECOVERED: return Color.GREEN;
+	case SUSCEPTIBLE: return Color.BLACK;
+	default: return Color.ORANGE;
+	}
+}
+}
+}
+
+
+]]></Text>
 		</JavaClass>
 		<!--   =========   Java Class   ========  -->
 		<JavaClass>
@@ -2176,7 +2562,7 @@ public class HCell implements Serializable{
 	// Collection Variables
 	private java.util.ArrayList < Integer > inParticles = new java.util.ArrayList<Integer>();
 	private java.util.ArrayList <Integer > outParticles = new java.util.ArrayList<Integer>();
-	private java.util.ArrayList <Integer> neighbours = new java.util.ArrayList<Integer>();
+	//private java.util.ArrayList <Integer> neighbours = new java.util.ArrayList<Integer>();
 	private HCell getHCell(int index, HexGrid hexGrid) {
 		if (index<0) throw new RuntimeException("index < 0 "+index);
 		return hexGrid.hCells.get(index);
@@ -2198,7 +2584,7 @@ public class HCell implements Serializable{
 			HCell neighbour = this.getNeighbour(dir, hexGrid);
 			this.outParticles.set(dir.getValue(), null);
 			if (neighbour != null) {
-				neighbour.recieveParticleFrom(this, p);
+				neighbour.recieveParticleFrom(this, p, hexGrid);
 				this.count--;
 			} else {
 				// we've hit a wall
@@ -2240,18 +2626,18 @@ public class HCell implements Serializable{
 	 * @param neighbour - must be neighbour, not null<br>
 	 * @param newParticle - null is valid
 	 */
-	public void recieveParticleFrom( HCell neighbour, Integer newParticle ) { 
+	public void recieveParticleFrom( HCell neighbour, Integer newParticle, HexGrid hexGrid) { 
 
 		if (neighbour == null) throw new NullPointerException("Input neighbour is null");
 		for (int i=0; i<6; i++) {
-			if (neighbour.getIndex() ==this.neighbours.get(i)) {
+			if (neighbour.getIndex() == hexGrid.gridHelper.getNeighbour(this.index, Direction.fromInt(i))) {
 				Tools.Direction dir = Tools.Direction.opposite(Tools.Direction.fromInt(i));
 				this.inParticles.set(dir.getValue(), newParticle);
 				count++;
 				return;
 			}
 		}
-		throw new RuntimeException("Input neighbour is not a neighbour of this cell."); 
+		throw new RuntimeException("Input neighbour "+neighbour.getIndex()+" is not a neighbour of this cell."+this.index); 
 	}
 
 	/**
@@ -2260,7 +2646,7 @@ public class HCell implements Serializable{
 	public HCell getNeighbour( Tools.Direction direction, HexGrid hexGrid ) { 
 
 		if (direction==null) throw new NullPointerException("Input direction is null");
-		int neig = this.neighbours.get(direction.getValue());
+		int neig = hexGrid.gridHelper.getNeighbour(this.index, direction);
 		if (neig<0) {
 			return null;
 		}
@@ -2273,21 +2659,20 @@ public class HCell implements Serializable{
 	 * @param neighbour - may be null, may not exist for another direction<br>
 	 * @param direction - not null
 	 */
-	public void setNeighbour( int neighbourIndex, Tools.Direction direction ) { 
-
+	/*public void setNeighbour( int neighbourIndex, Tools.Direction direction ) { 
 		if (direction==null) throw new NullPointerException("Input direction is null");
 		if (neighbourIndex > 0 && this.neighbours.contains(neighbourIndex) && neighbourIndex!=(this.neighbours.get(direction.getValue()))) {
 			throw new RuntimeException("The input neighbour is already set in this HexCell for a different direction.");
 		}
 		this.neighbours.set(direction.getValue(), neighbourIndex);
-
-	}
-
+		//System.out.println("neighbourIndex: "+neighbourIndex+" direction"+direction);
+		
+	}*/
 	/**
 	 * After movement<br>
 	 * Takes in-particles and performs collisions on them
 	 */
-	private void performCollision(  ) { 
+	private void performCollision(boolean skipCollision) { 
 
 		if (this.count==0) return;
 		int count = this.count;//this.getInCount();
@@ -2297,7 +2682,7 @@ public class HCell implements Serializable{
 			this.outParticles.set(i, this.inParticles.get(i));
 			this.inParticles.set(i, null);
 		}
-
+		if(skipCollision) return;
 		if (count==0) return; // no collision
 		else if (count==1) {
 			//System.out.println("Count 1; no collision");
@@ -2517,7 +2902,7 @@ public class HCell implements Serializable{
 
 	public void onStep(HexGrid hexGrid) {
 
-		this.performCollision();
+		this.performCollision(true);
 		this.performInfections(hexGrid);
 		this.performRecoveries(hexGrid);
 		this.updateParticleParents(hexGrid);
@@ -2546,12 +2931,12 @@ public class HCell implements Serializable{
 		this.outParticles.add(null);
 		this.outParticles.add(null);
 
+		/*this.neighbours.add(-1);
 		this.neighbours.add(-1);
 		this.neighbours.add(-1);
 		this.neighbours.add(-1);
 		this.neighbours.add(-1);
-		this.neighbours.add(-1);
-		this.neighbours.add(-1);
+		this.neighbours.add(-1);*/
 		
 		this.R_E = null;
 		this.R_SE = null;
