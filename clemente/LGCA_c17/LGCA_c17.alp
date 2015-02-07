@@ -21,17 +21,17 @@
 			<PresentationTopGroupPersistent>true</PresentationTopGroupPersistent>
 			<IconTopGroupPersistent>true</IconTopGroupPersistent>
 			<StartupCode><![CDATA[this.gridHelper = new Tools.GridHelper(this.numRows, this.numColumns);
-System.out.println("HexGrid onStartup start");
+if (this.debugOutput)System.out.println("HexGrid onStartup start");
 this.initHCells();
-System.out.println("HexGrid onStartup initHCells done");
+if (this.debugOutput)System.out.println("HexGrid onStartup initHCells done");
 createHexGrid();
-System.out.println("HexGrid onStartup createHexGrid done");
+if (this.debugOutput)System.out.println("HexGrid onStartup createHexGrid done");
 initParticles();
-System.out.println("HexGrid onStartup initParticles done");
+if (this.debugOutput)System.out.println("HexGrid onStartup initParticles done");
 populateHCells();
-System.out.println("HexGrid onStartup populateHCells done");
+if (this.debugOutput)System.out.println("HexGrid onStartup populateHCells done");
 //populateHCellsCustom();
-System.out.println("HexGrid onStartup end");]]></StartupCode>
+if (this.debugOutput)System.out.println("HexGrid onStartup end");]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1423154455816</Id>
@@ -453,6 +453,31 @@ System.out.println("HexGrid onStartup end");]]></StartupCode>
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1423306075337</Id>
+					<Name><![CDATA[skipCollision]]></Name>
+					<X>350</X><Y>-20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<NumericType><![CDATA[double]]></NumericType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1423306075335</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1423011870046</Id>
 					<Name><![CDATA[particles]]></Name>
@@ -516,7 +541,11 @@ if (numColumns<=0) throw new RuntimeException("numColumns has to be larger than 
 if (this.hCells.size() != (int)(this.numRows*this.numColumns)) throw new RuntimeException("hCells should have "+(numRows*numColumns)+" elements but only has "+this.hCells.size());
 
 this.popIndex = new int[this.hCells.size()*6];
-
+double rootX = 10;
+double rootY = 235;
+//set rectangle
+this.rectangle.setX(rootX);
+this.rectangle.setY(rootY);
 // Set positions:
 if (numColumns > 1) {
 	this.rectangle.setHeight(numRows*HCell.height-(numRows*HCell.verticalOffset)+HCell.verticalOffset);
@@ -546,8 +575,8 @@ for (int r=0; r<numRows; r++) {
 	}
 }
 
-this.datagraph.setX(this.rectangle.getX()+340);
-this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);]]></Body>
+this.datagraph.setX(350);
+this.datagraph.setY(115);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -561,7 +590,7 @@ this.datagraph.setY(this.rectangle.getY()+this.rectangle.getHeight()+120);]]></B
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[this.clearAllParticles();
 //int[][] index = new int[this.hCells.size()*6][2];
-System.out.println("populateHCells clearAllParticles done");
+if (this.debugOutput)System.out.println("populateHCells clearAllParticles done");
 int cellCounter=-1;
 final int mult =100000000;
 for (int i=0; i<(this.hCells.size()); i++) {
@@ -572,17 +601,19 @@ for (int i=0; i<(this.hCells.size()); i++) {
 	}
 	
 }
-System.out.println("populateHCells index filled");
+if (this.debugOutput)System.out.println("populateHCells index filled");
 //index = Tools.shuffleArrayList(index);
 //Collections.shuffle(index);
 this.shufflePopIndex();
-System.out.println("populateHCells index shuffled");
+if (this.debugOutput)System.out.println("populateHCells index shuffled");
 
 int cellNum = -2;
 int dirNum = -2;
 // will contain Particle initialization
 for (int i=0; i<particles.size(); i++) {
+	if (this.debugOutput){
 	if (i%1000==0) System.out.println(i);
+	}
 	for (int j=0; j<=6; j++) {
 	if (j==6) throw new RuntimeException("wrong decomposition "+this.popIndex[i]+" "+i);
 		 
@@ -596,7 +627,7 @@ for (int i=0; i<particles.size(); i++) {
 	//System.out.println("hCellSize:"+this.hCells.size()+" particlesSize:"+this.particles.size()+" pop: cellNum:"+cellNum+" dirNum:"+dirNum);
 	hCells.get(cellNum).setParticle(Tools.Direction.fromInt(dirNum), i);
 }
-System.out.println("populateHCells afterParticleSet");]]></Body>
+if (this.debugOutput)System.out.println("populateHCells afterParticleSet");]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -608,8 +639,11 @@ System.out.println("populateHCells afterParticleSet");]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[//this.map.get(3).get(0).setParticle(Tools.Direction.E, 0);
-//this.map.get(3).get(8).setParticle(Tools.Direction.W, 1);]]></Body>
+					<Body><![CDATA[this.clearAllParticles();
+
+hCells.get(Tools.getCellIndex(4, 1, this.numRows, this.numColumns)).setParticle(Tools.Direction.E, 0);
+hCells.get(Tools.getCellIndex(4, 9, this.numRows, this.numColumns)).setParticle(Tools.Direction.W, 1);
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -994,7 +1028,7 @@ for (int i = this.popIndex.length - 1; i > 0; i--){
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
-					<AutoUpdate>true</AutoUpdate>
+					<AutoUpdate>false</AutoUpdate>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1423209600000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
@@ -1112,22 +1146,25 @@ for (int i = this.popIndex.length - 1; i > 0; i--){
 for (HCell c : this.hexGrid.hCells) {
 	c.onStep(this.hexGrid);
 }
-if (this.hexGrid.debugOutput)System.out.println("Clock onStep end");
 if (this.hexGrid.displayParticles) {
 for (Particle p : this.hexGrid.particles) {
 	p.updateRepresentation(this.hexGrid);
 }
 }
-]]></AfterStepCode>
+this.hexGrid.plot.updateData();
+if (this.hexGrid.debugOutput)System.out.println("Clock onStep end");]]></AfterStepCode>
 				<BeforeStepCode><![CDATA[if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep start");
-for (HCell c : this.hexGrid.hCells) {
-	c.onBeforeStep(this.hexGrid);
-}
+
 if (this.hexGrid.randomizeParticleLocationsBeforeEachStep) {
+	System.out.println("Clock randomizeParticleLocationsBeforeEachStep start");
 	//System.out.println("random");
 	this.hexGrid.populateHCells();
+	if (this.hexGrid.debugOutput)System.out.println("Clock randomizeParticleLocationsBeforeEachStep end");
 } else {
 	//(System.out.println("no random");
+}
+for (HCell c : this.hexGrid.hCells) {
+	c.onBeforeStep(this.hexGrid);
 }
 if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></BeforeStepCode>
 			</AgentProperties>
@@ -1365,7 +1402,7 @@ if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></B
 				<Variable Class="PlainVariable">
 					<Id>1422893288108</Id>
 					<Name><![CDATA[randomizeParticleLocationsBeforeEachStep]]></Name>
-					<X>310</X><Y>190</Y>
+					<X>400</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -1422,6 +1459,19 @@ if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></B
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1423306017054</Id>
+					<Name><![CDATA[skipCollisions]]></Name>
+					<X>450</X><Y>110</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue><![CDATA[false]]></InitialValue>                 	
 					</Properties>
 				</Variable>
 			</Variables>
@@ -1559,6 +1609,40 @@ if (this.hexGrid.debugOutput)System.out.println("Clock onBeforeStep end");]]></B
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<Text>
+					<Id>1423307125332</Id>
+					<Name><![CDATA[text6]]></Name>
+					<X>530</X><Y>50</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<AsObject>true</AsObject>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Usage:
+
+numRows and numColumns define the height and width of the created hexagonal grid.
+numParticles defines the number of particles living in the hexgrid. For obvious reasons that
+number may not be larger than numColumns*numRows*6.
+
+initialInfected, initialSusceptible and initialRecovered define the states of the particles
+at the beginning of the simulation.
+Please set all of them to 0 before you change the number of particles or you might
+get a crash because the value of the slider exceeds its length. the slider mayimums
+are calculated based on numParticles.
+
+C and N can be used to calculate n.]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>10</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Shapes>
 			<Controls>
 				<Control Type="Button">
@@ -1649,10 +1733,20 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 						<FillColor/>
 						<TextColor/>
 						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[int maxSus = this.numParticles-this.initialInfected-this.initialRecovered;
+if (this.initialSusceptible>maxSus) this.initialSusceptible=maxSus;
+int maxInf = this.numParticles-this.initialSusceptible-this.initialRecovered;
+if (this.initialInfected>maxInf) this.initialInfected=maxInf;
+int maxRec = this.numParticles-this.initialSusceptible-this.initialInfected;
+if (this.initialRecovered>maxRec) this.initialRecovered=maxRec;
+this.sliderInitialSusceptible.setRange(0, maxSus);
+this.sliderInitialInfected.setRange(0, maxInf);
+this.sliderInitialRecovered.setRange(0, maxRec);]]></ActionCode>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
 						<MinValue><![CDATA[0]]></MinValue>
+						<MaxValue><![CDATA[numRows*numColumns*6]]></MaxValue>
 						<LinkTo>true</LinkTo>
 						<Link>numParticles</Link>
 					</ExtendedProperties>
@@ -1708,7 +1802,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				<Control Type="Slider">
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1422788413743</Id>
-					<Name><![CDATA[slider2]]></Name>
+					<Name><![CDATA[sliderInitialInfected]]></Name>
 					<X>160</X><Y>300</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -1732,7 +1826,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				<Control Type="Slider">
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1422788496175</Id>
-					<Name><![CDATA[slider3]]></Name>
+					<Name><![CDATA[sliderInitialSusceptible]]></Name>
 					<X>160</X><Y>350</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -1756,7 +1850,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 				<Control Type="Slider">
 				 	<EmbeddedIcon>false</EmbeddedIcon>				
 					<Id>1422788522388</Id>
-					<Name><![CDATA[slider4]]></Name>
+					<Name><![CDATA[sliderInitialRecovered]]></Name>
 					<X>160</X><Y>400</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -1772,7 +1866,7 @@ getPresentation().setPresentable( getEngine().getRoot() );]]></ActionCode>
 						<DefaultValueCode><![CDATA[0]]></DefaultValueCode>
 						<Orientation>HORIZONTAL</Orientation>
 						<MinValue><![CDATA[0]]></MinValue>
-						<MaxValue><![CDATA[this.numParticles-this.initialInfected-this.initialSusceptible]]></MaxValue>
+						<MaxValue><![CDATA[this.numParticles-this.initialSusceptible-this.initialInfected]]></MaxValue>
 						<LinkTo>true</LinkTo>
 						<Link>initialRecovered</Link>
 					</ExtendedProperties>
@@ -1874,6 +1968,52 @@ this.numRows=(int)this.n;]]></ActionCode>
 						<Link>N</Link>
 					</ExtendedProperties>
 				</Control>
+				<Control Type="CheckBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1423305987896</Id>
+					<Name><![CDATA[checkbox2]]></Name>
+					<X>290</X><Y>110</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="220" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[show debug output]]></LabelText>
+						<LinkTo>true</LinkTo>
+						<Link>debugOutput</Link>
+	 				</ExtendedProperties>
+				</Control>
+				<Control Type="CheckBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1423306034806</Id>
+					<Name><![CDATA[checkbox3]]></Name>
+					<X>290</X><Y>170</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<BasicProperties Width="100" Height="30" 
+				AsObject="true">
+                        <EmbeddedIcon>false</EmbeddedIcon>				
+						<FillColor/>
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[skip Collisions]]></LabelText>
+						<LinkTo>true</LinkTo>
+						<Link>skipCollisions</Link>
+	 				</ExtendedProperties>
+				</Control>
 			</Controls>
 
 			<Parameters>			
@@ -1939,6 +2079,12 @@ this.numRows=(int)this.n;]]></ActionCode>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[displayParticles]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[skipCollision]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[this.skipCollisions]]></Code>
+					</ParameterValue>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties 
@@ -2323,6 +2469,19 @@ public static Direction random() {
 	return Direction.fromInt(x);
 }
 }
+/**
+ * Helper method<br>
+ * gets cell index for the input row and column
+ * @param row starts with 0; <numRows
+ * @param column starts with 0; <numColumns
+ * @param numRows
+ * @param numColumns
+ * @return
+ */
+public static int getCellIndex(int row, int column, int numRows, int numColumns) {
+	int out = (numRows*row)+column;
+	return out;
+}
 public static class Point {
 public double x=0;
 public double y=0;
@@ -2473,7 +2632,7 @@ public class Particle implements Serializable {
 		return this.state == Tools.Status.RECOVERED;
 	}
 	public void updateRepresentation(HexGrid hexGrid) {
-		//System.out.println(this.id+" - "+this.state);
+		//System.out.println(this.id+" parent:"+this.parentCellIndex+" - State:"+this.state+" - Dir:"+this.direction);
 		this.pixel.setColor(Tools.Status.getColor(this.state));
 		double[] pos = hexGrid.hCells.get(this.parentCellIndex).getPixelPosition(this.direction);
 		this.pixel.setPos(pos[0], pos[1]);
@@ -2609,14 +2768,19 @@ public static final double width = 4.0*pixelSize;
 public static final double height = 3.0*pixelSize;
 public static final double verticalOffset = 1.0*pixelSize;
 public static final double horizontalOffset = 2.0*pixelSize;
+
 private int[] inParticles = new int[]{-1,-1,-1,-1,-1,-1};
 private int[] outParticles = new int[]{-1,-1,-1,-1,-1,-1};
 
 private  int count;
-// Collection Variables
-//private java.util.ArrayList < Integer > inParticlesX = new java.util.ArrayList<Integer>();
-//private java.util.ArrayList <Integer > outParticlesX = new java.util.ArrayList<Integer>();
-//private java.util.ArrayList <Integer> neighbours = new java.util.ArrayList<Integer>();
+
+public Tools.Status R_SW;
+public Tools.Status R_NW;
+public Tools.Status R_E;
+public Tools.Status R_W;
+public Tools.Status R_SE;
+public Tools.Status R_NE;
+
 private HCell getHCell(int index, HexGrid hexGrid) {
 	if (index<0) throw new RuntimeException("index < 0 "+index);
 	return hexGrid.hCells.get(index);
@@ -2941,16 +3105,9 @@ void performRecoveries(HexGrid hexGrid) {
 	} 
 }
 
-public Tools.Status R_SW;
-public Tools.Status R_NW;
-public Tools.Status R_E;
-public Tools.Status R_W;
-public Tools.Status R_SE;
-public Tools.Status R_NE;
-
 public void onStep(HexGrid hexGrid) {
 
-	this.performCollision(true);
+	this.performCollision(hexGrid.skipCollision);
 	this.performInfections(hexGrid);
 	this.performRecoveries(hexGrid);
 	this.updateParticleParents(hexGrid);
