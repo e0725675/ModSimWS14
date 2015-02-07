@@ -2553,6 +2553,7 @@ public class HCell implements Serializable{
 		}
 		return new double[]{3,3};
 	}
+	
 	public static final double pixelSize = 2.0;
 	public static final double width = 4.0*pixelSize;
 	public static final double height = 3.0*pixelSize;
@@ -2566,6 +2567,30 @@ public class HCell implements Serializable{
 	private HCell getHCell(int index, HexGrid hexGrid) {
 		if (index<0) throw new RuntimeException("index < 0 "+index);
 		return hexGrid.hCells.get(index);
+	}
+	private void setInParticle(int index, int particle) {
+		
+	}
+	private void setInParticle(Direction dir, int particle) {
+		this.setInParticle(dir.getValue(), particle);
+	}
+	private void setOutParticle(int index, int particle) {
+		
+	}
+	private void setOutParticle(Direction dir, int particle) {
+		this.setOutParticle(dir.getValue(), particle);
+	}
+	private int getInParticle(int index) {
+		return this.inParticles.get(index);
+	}
+	private int getInParticle(Direction dir) {
+		return this.getInParticle(dir.getValue());
+	}
+	private int getOutParticle(int index) {
+		return this.outParticles.get(index);
+	}
+	private int getOutParticle(Direction dir) {
+		return this.getOutParticle(dir.getValue());
 	}
 	/**
 	 * Will check the neighbours and move particles that are supposed to come here to this cell.<br><br>
